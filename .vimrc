@@ -1,46 +1,85 @@
 if &t_Co > 1
-		syntax enable
-		colorscheme monokai
-		"colorscheme molokai
-		""let g:molokai_original = 1
-		"colorscheme badworf
-		set hlsearch
-		set tabstop=4
-		set ts=4
-		set shiftwidth=4
-"		set expandtab
-		syntax on
-		set nobackup
-		set number
-		set encoding=utf-8
-		set fileencoding=utf-8
-		set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
-		set autoindent
-		set incsearch
-		set ignorecase
-		set showmatch
-		set matchtime=1
-		set showmode
-		set title
-		set ruler
-		set display=lastline
-		set pumheight=8
-		
-		nmap <Esc><Esc> :nohlsearch<CR><Esc>
-		nnoremap \ #
-		nnoremap Y y$
+	    syntax enable
+"colorscheme-----------------
+	    colorscheme monokai
+	    ""colorscheme kitchen
+	
+	    "colorscheme molokai
+	    "let g:molokai_original = 1
+	    "let g:rehash256 = 1
+	    
+	    "colorscheme badwolf
+	    "highlight Normal ctermbg=none
+	    "colorscheme goodwolf
+"other-----------------------
+	    set hlsearch
+	    set smarttab
+	    set tabstop=4
+	    set ts=4
+	    set shiftwidth=4
+	    set expandtab	"make 'tab' 'space' for color indent custom
+
+	    syntax on
+	    set nobackup
+	    set number
+	    set encoding=utf-8
+	    set fileencoding=utf-8
+	    set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+	    set autoindent
+	    set incsearch
+	    set ignorecase
+	    set showmatch
+	    set matchtime=1
+	    set showmode
+	    set title
+	    set ruler
+	    set display=lastline
+	    set pumheight=8
+	    
+	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
+	    noremap Y y$
+	    nnoremap \ #
+	    nnoremap ^ $
+"		nnoremap <C-^> ^
+"
+        inoremap { {}<Left>
+        inoremap [ []<Left>
+        inoremap ( ()<Left>
+        inoremap " ""<Left>
+        inoremap ' ''<Left>
+        inoremap < <><Left>
+        ""imap / //<Left>
+        
+        
 endif
 
 "^[$B>!<j$KDI2C!!KLLn^[(B
+"move cursor the last edit part-----------------------------
 if has("autocmd")
     	filetype plugin indent on
     	autocmd BufReadPost *
-				\ if line("'\"") > 0 && line("'\"") <= line("$") |
-				\ exe "normal g'\"" |
-				\ endif
+	            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+	            \ exe "normal g'\"" |
+	            \ endif
 endif
 
 set laststatus=2
+" for ZenkakuSpace -----------------------------------------
+" 全角スペースの表示
+" http://inari.hatenablog.com/entry/2014/05/05/231307
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+endfunction
+
+if has('syntax')
+        augroup ZenkakuSpace
+            autocmd!
+            autocmd ColorScheme * call ZenkakuSpace()
+            autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+        augroup END
+        call ZenkakuSpace()
+endif
+
 "予測変換-------------------------------------------
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 set completeopt=menuone
@@ -75,6 +114,12 @@ if dein#load_state(s:dein_dir)
 	call dein#add('Shougo/neocomplete.vim')
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('Shougo/unite.vim')
+    call dein#add('haya14busa/incsearch.vim')
+        nmap / <Plug>(incsearch-forward)
+        map ? <plug>(incsearch-background)
+        map g/ <plug>(incsearch-stay)
+    call dein#add('vim-Scripts/AnsiEsc.vim')
+    call dein#add('scrooloose/nerdtree')
 "	call dein#add('')
 
 	let g:rc_dir	= expand('~/.vim/rc')
@@ -116,4 +161,4 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 "set background=dark
-				
+            
