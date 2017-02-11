@@ -1,6 +1,8 @@
 if &t_Co > 1
 	    syntax enable
-"colorscheme-----------------
+"==============================================
+"colorscheme
+        set hlsearch
 	    colorscheme monokai
 	    ""colorscheme kitchen
 	
@@ -11,50 +13,91 @@ if &t_Co > 1
 	    "colorscheme badwolf
 	    "highlight Normal ctermbg=none
 	    "colorscheme goodwolf
-"other-----------------------
-	    set hlsearch
+
+"==============================================
+"syntax color   
+	    syntax on
+
+"==============================================
+"tab   
 	    set smarttab
 	    set tabstop=4
-	    set ts=4
 	    set shiftwidth=4
 	    set expandtab	"make 'tab' 'space' for color indent custom
+        set shiftround
 
-	    syntax on
-	    set nobackup
-	    set number
-	    set encoding=utf-8
-	    set fileencoding=utf-8
-	    set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+"==============================================
+"edit
 	    set autoindent
-	    set incsearch
+"       set smartindent
 	    set ignorecase
 	    set showmatch
 	    set matchtime=1
-	    set showmode
+"==============================================
+"search
+	    set incsearch
+"==============================================
+"auto correct
+        "limit of auto correct
+	    set pumheight=8
+
+        "paint auto correct
+        hi Pmenu        ctermfg=Black ctermbg=Grey
+        hi PmenuSel     ctermbg=Blue
+        hi PmenuSbar    ctermbg=Cyan
+
+"==============================================
+"display
+	    set number
 	    set title
 	    set ruler
 	    set display=lastline
-	    set pumheight=8
-	    
-	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
-	    noremap Y y$
-	    nnoremap \ #
-	    nnoremap ^ $
-"		nnoremap <C-^> ^
-"
+
+"==============================================
+"Character code
+	    set encoding=utf-8
+	    set fileencoding=utf-8
+	    set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+
+"==============================================
+"Back up
+        set nobackup
+"       noswapfile
+"==============================================
+"Other ???
+	    set showmode
+"==============================================
+"KeyMapping
+
+"	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
         inoremap { {}<Left>
         inoremap [ []<Left>
         inoremap ( ()<Left>
         inoremap " ""<Left>
         inoremap ' ''<Left>
         inoremap < <><Left>
-        ""imap / //<Left>
-        
-        
-endif
+        "imap / //<Left>   // for rudy
 
+        "move the display line-by-line
+        nmap j gj
+        nmap k gk
+        vmap j gj
+        vmap k gk
+
+        "open .vimrc , just now
+        nnoremap ,. :<C-u>edit $MYVIMRC<CR>
+        
+        "Individual Key Mapping
+        noremap Y y$
+	    nnoremap \ #
+	    nnoremap ^ $
+"		nnoremap <C-^> ^
+
+endif
+"-----------------------------------------------------------
 "^[$B>!<j$KDI2C!!KLLn^[(B
-"move cursor the last edit part-----------------------------
+"move cursor the last edit part
 if has("autocmd")
     	filetype plugin indent on
     	autocmd BufReadPost *
@@ -64,8 +107,8 @@ if has("autocmd")
 endif
 
 set laststatus=2
-" for ZenkakuSpace -----------------------------------------
-" 全角スペースの表示
+"----------------------------------------------------------
+" 全角スペースの表示 for ZenkakuSpace
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -80,7 +123,8 @@ if has('syntax')
         call ZenkakuSpace()
 endif
 
-"予測変換-------------------------------------------
+"---------------------------------------------------------
+"予測変換 auto correct indicater
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 set completeopt=menuone
 for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
@@ -88,7 +132,8 @@ for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
 endfor
 imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 
-"dein Scripts---------------------------------------
+"---------------------------------------------------------
+"dein Scripts
 if &compatible
 	set nocompatible
 endif
@@ -100,12 +145,10 @@ let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 " dein.vim がなければ github から落としてくる
 if &runtimepath !~# '/dein.vim'
 	if !isdirectory(s:dein_repo_dir)
-		execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
 	endif
 	execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
-
-"set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
@@ -113,14 +156,47 @@ if dein#load_state(s:dein_dir)
 "	call dein#add({path to dein.vim directory})
 	call dein#add('Shougo/neocomplete.vim')
 	call dein#add('Shougo/deoplete.nvim')
-	call dein#add('Shougo/unite.vim')
+"	call dein#add('Shougo/unite.vim') 
+    " comment : need python3 install
+
     call dein#add('haya14busa/incsearch.vim')
         nmap / <Plug>(incsearch-forward)
         map ? <plug>(incsearch-background)
         map g/ <plug>(incsearch-stay)
+    " comment : give color to some search word
+
     call dein#add('vim-Scripts/AnsiEsc.vim')
+    " comment : color log file 
+
     call dein#add('scrooloose/nerdtree')
+    " comment : it is the <<<God Plugin>>>
+    "           let ':NERDTree'!!
+
+    call dein#add('osyo-manga/vim-anzu')
+    " mapping
+    " when you want to display it in screen,change this
+    if 1    " if 1
+        nmap n <Plug>(anzu-n-with-echo)
+        nmap N <Plug>(anzu-N-with-echo)
+    else    " if 0
+        nmap n <Plug>(anzu-mode-n)
+        nmap N <Plug>(anzu-mode-N)
+    endif
+        nmap * <Plug>(anzu-star-with-echo)
+        nmap # <Plug>(anzu-sharp-with-echo) 
+    " clear status
+        nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+    " statusline
+        set statusline=%{anzu#search_status()}
+    " comment :
+    "           if you search 'word', word(12/51) in command line
+    
+    call dein#add('osyo-manga/vim-over')
+    " command : when you '%s/word1/word2/g', 
+    "           paint ward after ':OverCommandLine'!
+    
 "	call dein#add('')
+" --- Please add new plugin ---
 
 	let g:rc_dir	= expand('~/.vim/rc')
 	let s:toml		= g:rc_dir . '/dein.toml'
@@ -141,11 +217,10 @@ if dein#check_install()
 	call dein#install()
 endif
 
-"End dein Scripts --------------
-
+"-----------------------------------------------------------
 "indent color
-
 "インデントに色を付けて見やすくする
+
 "NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
@@ -161,4 +236,4 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 "set background=dark
-            
+
