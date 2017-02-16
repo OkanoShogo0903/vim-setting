@@ -122,9 +122,16 @@ if &t_Co > 1
 
     "'Edit short cut' application
         nnoremap <C-z> u
-"        nnoremap <C-S-Z> <C-r>
-"        nnoremap <S-^z> <C-r>
+        nnoremap <C-y> <C-r>
+        
+"        nnoremap <S-Up> v
+"        nnoremap <S-Down> v
+"        nnoremap <S-Left> v
+"        nnoremap <S-Right> v
+        vnoremap <Tab> >
+        vnoremap <S-Tab> <
 
+        
     "open .vimrc , just now
         nnoremap ,. :<C-u>edit $MYVIMRC<CR>
         
@@ -237,7 +244,23 @@ if dein#load_state(s:dein_dir)
     call dein#add('osyo-manga/vim-over')
     " command : when you '%s/word1/word2/g', 
     "           paint ward after ':OverCommandLine'!
-    
+    call dein#add('nathanaelkane/vim-indent-guides')
+    "indent color
+    "インデントに色を付けて見やすくする
+
+    "vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+    let g:indent_guides_enable_on_vim_startup = 1
+    "自動カラー無効
+    let g:indent_guides_auto_colors = 0
+    "偶数行と奇数行の色を設定
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black "3
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray "4
+    "何行目から色付けを行うかを指定する
+    let g:indent_guides_start_level = 2
+    "可視化領域のサイズを指定
+    let g:indent_guides_guide_size = 1
+    "set background=dark
+
 "	call dein#add('')
 " --- Please add new plugin ---
 
@@ -261,22 +284,3 @@ if dein#check_install()
 endif
 
 "-----------------------------------------------------------
-"indent color
-"インデントに色を付けて見やすくする
-
-"NeoBundle 'nathanaelkane/vim-indent-guides'
-
-" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
-let g:indent_guides_enable_on_vim_startup = 1
-"自動カラー無効
-let g:indent_guides_auto_colors = 0
-"偶数行と奇数行の色を設定
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black "3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray "4
-"何行目から色付けを行うかを指定する
-let g:indent_guides_start_level = 2
-"可視化領域のサイズを指定
-let g:indent_guides_guide_size = 1
-
-"set background=dark
-
