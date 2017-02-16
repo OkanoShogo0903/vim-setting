@@ -3,8 +3,8 @@ if &t_Co > 1
 "==============================================
 "colorscheme
         set hlsearch
-	    colorscheme monokai
-	    ""colorscheme kitchen
+	    "colorscheme monokai
+	    "colorscheme kitchen
 	
 	    "colorscheme molokai
 	    "let g:molokai_original = 1
@@ -13,7 +13,7 @@ if &t_Co > 1
 	    "colorscheme badwolf
 	    "highlight Normal ctermbg=none
 	    "colorscheme goodwolf
-
+        
 "==============================================
 "syntax color   
 	    syntax on
@@ -42,6 +42,7 @@ if &t_Co > 1
 	    set pumheight=8
 
         "paint auto correct
+        "for vim7
         hi Pmenu        ctermfg=Black ctermbg=Grey
         hi PmenuSel     ctermbg=Blue
         hi PmenuSbar    ctermbg=Cyan
@@ -69,7 +70,12 @@ if &t_Co > 1
 "==============================================
 "KeyMapping
 
-"	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
+     "誤動作予防
+        nnoremap Q <Nop>
+"        nnoremap ZZ <Nop>
+"        nnoremap ZQ <Nop>
+
+	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
         inoremap { {}<Left>
         inoremap [ []<Left>
@@ -79,20 +85,57 @@ if &t_Co > 1
         inoremap < <><Left>
         "imap / //<Left>   // for rudy
 
-        "move the display line-by-line
-        nmap j gj
-        nmap k gk
-        vmap j gj
-        vmap k gk
+    "move the display line-by-line
+        nnoremap j gj
+        nnoremap k gk
+        vnoremap j gj
+        vnoremap k gk
 
-        "open .vimrc , just now
+        nnoremap <silent><C-e> :NERDTree<CR>
+        
+    "Alt key カーソル位置を移動する前に戻す
+        nnoremap <M-Right> <C-i>
+        nnoremap <M-Left> <C-o>
+
+    "'Browser page reading short cut' application
+        nnoremap <C-Up> gg
+        nnoremap <C-Down> <S-g>
+        nnoremap <Home> gg
+
+"これを有効にすればCtrl+Tabが利用できるようになるが、別途インストールが必要なため、導入をしない。よってCtrl+Tabによるショートカットは利用しない
+"        *vt100.translation: #override \n\
+"            Ctrl ~Shift <Key>Tab: string(0x1b) string("[27;5;9~") \n \
+"            Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n
+
+    "Ctrl + Tab が使えないため、保留
+        if 0
+            nnoremap <C-w> :close<CR>
+            nnoremap <C-Tab> :echo "bbb"<CR>
+            nnoremap <C-Tab> <C-w><C-w>
+        endif
+
+        nnoremap <C-Tab> :echo "abc"<CR>
+
+    "if サーチモードがオンの時のみにしたい
+        nmap <Tab> n<CR>
+        nmap <S-Tab> <S-n>
+
+    "'Edit short cut' application
+        nnoremap <C-z> u
+"        nnoremap <C-S-Z> <C-r>
+"        nnoremap <S-^z> <C-r>
+
+    "open .vimrc , just now
         nnoremap ,. :<C-u>edit $MYVIMRC<CR>
         
-        "Individual Key Mapping
+    "Individual Key Mapping
         noremap Y y$
-	    nnoremap \ #
+	    nnoremap \ *
 	    nnoremap ^ $
-"		nnoremap <C-^> ^
+"	    nnoremap <S-^> ^
+        nnoremap <S-w> b
+        nnoremap <C-u> g;
+        nnoremap <C-r> g,
 
 endif
 "-----------------------------------------------------------
@@ -169,7 +212,7 @@ if dein#load_state(s:dein_dir)
     " comment : color log file 
 
     call dein#add('scrooloose/nerdtree')
-    " comment : it is the <<<God Plugin>>>
+    " comment : it is the God Plugin
     "           let ':NERDTree'!!
 
     call dein#add('osyo-manga/vim-anzu')
@@ -185,12 +228,12 @@ if dein#load_state(s:dein_dir)
         nmap * <Plug>(anzu-star-with-echo)
         nmap # <Plug>(anzu-sharp-with-echo) 
     " clear status
-        nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+"        nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
     " statusline
         set statusline=%{anzu#search_status()}
     " comment :
     "           if you search 'word', word(12/51) in command line
-    
+
     call dein#add('osyo-manga/vim-over')
     " command : when you '%s/word1/word2/g', 
     "           paint ward after ':OverCommandLine'!
