@@ -1,4 +1,7 @@
-if &t_Co > 1
+
+
+
+if &t_Co> 1
 	    syntax enable
 "==============================================
 "colorscheme
@@ -33,8 +36,7 @@ if &t_Co > 1
 	    set ignorecase
 	    set showmatch
 	    set matchtime=1
-"==============================================
-"search
+"=============================================="search
 	    set incsearch
 "==============================================
 "auto correct
@@ -70,11 +72,12 @@ if &t_Co > 1
 "==============================================
 "KeyMapping
 
-     "$B8mF0:nM=KI(B
+    "誤動作予防
         nnoremap Q <Nop>
-"        nnoremap ZZ <Nop>
+        nnoremap ZZ <Nop>
 "        nnoremap ZQ <Nop>
-
+    
+    "basic
 	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
         inoremap { {}<Left>
@@ -85,6 +88,8 @@ if &t_Co > 1
         inoremap < <><Left>
         "imap / //<Left>   // for rudy
 
+        
+
     "move the display line-by-line
         nnoremap j gj
         nnoremap k gk
@@ -93,7 +98,7 @@ if &t_Co > 1
 
         nnoremap <silent><C-e> :NERDTree<CR>
         
-    "Alt key $B%+!<%=%k0LCV$r0\F0$9$kA0$KLa$9(B
+    "Alt key カーソル位置を移動する前に戻す
         nnoremap <M-Right> <C-i>
         nnoremap <M-Left> <C-o>
 
@@ -102,12 +107,12 @@ if &t_Co > 1
         nnoremap <C-Down> <S-g>
         nnoremap <Home> gg
 
-"$B$3$l$rM-8z$K$9$l$P(BCtrl+Tab$B$,MxMQ$G$-$k$h$&$K$J$k$,!"JLES%$%s%9%H!<%k$,I,MW$J$?$a!"F3F~$r$7$J$$!#$h$C$F(BCtrl+Tab$B$K$h$k%7%g!<%H%+%C%H$OMxMQ$7$J$$(B
+"これを有効にすればCtrl+Tabが利用できるようになるが、別途インストールが必要なため、導入をしない。よってCtrl+Tabによるショートカットは利用しない
 "        *vt100.translation: #override \n\
 "            Ctrl ~Shift <Key>Tab: string(0x1b) string("[27;5;9~") \n \
 "            Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n
 
-    "Ctrl + Tab $B$,;H$($J$$$?$a!"J]N1(B
+    "Ctrl + Tab が使えないため、保留
         if 0
             nnoremap <C-w> :close<CR>
             nnoremap <C-Tab> :echo "bbb"<CR>
@@ -116,33 +121,54 @@ if &t_Co > 1
 
         nnoremap <C-Tab> :echo "abc"<CR>
 
-    "if $B%5!<%A%b!<%I$,%*%s$N;~$N$_$K$7$?$$(B
-        nmap <Tab> n<CR>
+    "if サーチモードがオンの時のみにしたい
+        nmap <Tab> n
         nmap <S-Tab> <S-n>
+"       nnoremap <Tab> >>
+"       nnoremap \<C-i> <C-i>
 
     "'Edit short cut' application
         nnoremap <C-z> u
         nnoremap <C-y> <C-r>
+        nnoremap <C-f> /
         
 "        nnoremap <S-Up> v
 "        nnoremap <S-Down> v
-"        nnoremap <S-Left> v
-"        nnoremap <S-Right> v
-        vnoremap <Tab> >
-        vnoremap <S-Tab> <
-
+        nnoremap <S-Left> v
+        nnoremap <S-Right> v
+        xnoremap <C-x> d
+        xnoremap <C-c> y
+        nnoremap <C-v> p
+        noremap <C-a> ggVG
+        xnoremap <Tab> >
+        xnoremap <S-Tab> <
         
     "open .vimrc , just now
-        nnoremap ,. :<C-u>edit $MYVIMRC<CR>
-        
+        nnoremap <F5> :<C-u>split $MYVIMRC<CR>
+        nnoremap <F6> :<C-u>source $MYVIMRC<CR>
+"                    \ :source $MYGVIMRC<CR>
     "Individual Key Mapping
+    if 1
         noremap Y y$
 	    nnoremap \ *
 	    nnoremap ^ $
 "	    nnoremap <S-^> ^
         nnoremap <S-w> b
         nnoremap <C-u> g;
-        nnoremap <C-r> g,
+"        nnoremap <C-r> g,
+        
+    endif   
+    
+    command! DoSomething call WriteQuit()
+    function! WriteQuit()
+        write
+        quit
+    endfunction
+
+    augroup vimrc-awrite
+        autocmd!
+""        autocmd func_name * w
+    augroup END
 
 endif
 "-----------------------------------------------------------
@@ -158,7 +184,7 @@ endif
 
 set laststatus=2
 "----------------------------------------------------------
-" $BA43Q%9%Z!<%9$NI=<((B for ZenkakuSpace
+" 全角スペースの表示 for ZenkakuSpace
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -168,13 +194,13 @@ if has('syntax')
         augroup ZenkakuSpace
             autocmd!
             autocmd ColorScheme * call ZenkakuSpace()
-            autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '$B!!(B')
+            autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
         augroup END
         call ZenkakuSpace()
 endif
 
 "---------------------------------------------------------
-"$BM=B,JQ49(B auto correct indicater
+"予測変換 auto correct indicater
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 set completeopt=menuone
 for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
@@ -189,10 +215,10 @@ if &compatible
 endif
 
 let s:dein_dir = expand('~/.cache/dein')
-"" dein.vim $BK\BN(B
+"" dein.vim 本体
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" dein.vim $B$,$J$1$l$P(B github $B$+$iMn$H$7$F$/$k(B
+" dein.vim がなければ github から落としてくる
 if &runtimepath !~# '/dein.vim'
 	if !isdirectory(s:dein_repo_dir)
         execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
@@ -221,6 +247,8 @@ if dein#load_state(s:dein_dir)
     call dein#add('scrooloose/nerdtree')
     " comment : it is the God Plugin
     "           let ':NERDTree'!!
+    
+    call dein#add('scrooloose/nerdcommenter')
 
     call dein#add('osyo-manga/vim-anzu')
     " mapping
@@ -246,18 +274,18 @@ if dein#load_state(s:dein_dir)
     "           paint ward after ':OverCommandLine'!
     call dein#add('nathanaelkane/vim-indent-guides')
     "indent color
-    "$B%$%s%G%s%H$K?'$rIU$1$F8+$d$9$/$9$k(B
-
-    "vim$B$rN)$A>e$2$?$H$-$K!"<+F0E*$K(Bvim-indent-guides$B$r%*%s$K$9$k(B
+    "インデントに色を付けて見やすくする
+    
+    "vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
     let g:indent_guides_enable_on_vim_startup = 1
-    "$B<+F0%+%i!<L58z(B
+    "自動カラー無効
     let g:indent_guides_auto_colors = 0
-    "$B6v?t9T$H4q?t9T$N?'$r@_Dj(B
+    "偶数行と奇数行の色を設定
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black "3
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray "4
-    "$B2?9TL\$+$i?'IU$1$r9T$&$+$r;XDj$9$k(B
+    "何行目から色付けを行うかを指定する
     let g:indent_guides_start_level = 2
-    "$B2D;k2=NN0h$N%5%$%:$r;XDj(B
+    "可視化領域のサイズを指定
     let g:indent_guides_guide_size = 1
     "set background=dark
 
