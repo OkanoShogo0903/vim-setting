@@ -1,22 +1,38 @@
 
-
-
 if &t_Co> 1
 	    syntax enable
 "==============================================
+"個人用設定ファイルの読み込み
+"userの名前で判別
+"自分の設定ファイル作りたい方はどうぞ
+"    if exists("$USER")
+"        if $USER == 'okano'
+"            source ~/dotfiles/okano.vimrc
+"        endif
+"    endif
+    if filereadable(expand('~/.vim/subvimrc.vim'))
+        source ~/.vim/subvimrc.vim
+    endif
+"==============================================
 "colorscheme
+"    source color.vimrc
         set hlsearch
-	    "colorscheme monokai
-	    "colorscheme kitchen
 	
-	    "colorscheme molokai
-	    "let g:molokai_original = 1
-	    "let g:rehash256 = 1
-	    
-	    "colorscheme badwolf
-	    "highlight Normal ctermbg=none
-	    "colorscheme goodwolf
+        let monokai=0
+        let molokai=1
+        let kitchen=0
+        let badwolf=0
+        let goodwolf=0
+
+        colorscheme molokai
+"	    if     g:sheme == 'molokai'
+"	        let g:molokai_original = 1
+"	        let g:rehash256 = 1
+"	    elseif g:sheme == 'badwolf'
+"	        highlight Normal ctermbg=none
+ "       endif
         
+        set t_Co=256
 "==============================================
 "syntax color   
 	    syntax on
@@ -57,6 +73,14 @@ if &t_Co> 1
 	    set display=lastline
 
 "==============================================
+"ステータスラインの色をノーマルモードと挿入モードで区別する
+"guifg = FrontGround
+"guibg = BackGround
+"gui,cterm = BigChar, SlantingChar
+"        au InsertEnter * hi statusLine guifg=DarkBlue guibg=DarkGray gui=none ctermfg=Blue ctermbg=DarkGray cterm=none
+"        au InsertLeave * hi statusLine guifg=DarkBlue guibg=DarkGray gui=none ctermfg=Blue ctermbg=DarkGray cterm=none
+
+"==============================================
 "Character code
 	    set encoding=utf-8
 	    set fileencoding=utf-8
@@ -69,13 +93,14 @@ if &t_Co> 1
 "==============================================
 "Other ???
 	    set showmode
+        set helplang=ja
 "==============================================
 "KeyMapping
 
     "誤動作予防
         nnoremap Q <Nop>
         nnoremap ZZ <Nop>
-"        nnoremap ZQ <Nop>
+        nnoremap ZQ <Nop>
     
     "basic
 	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
@@ -97,15 +122,16 @@ if &t_Co> 1
         vnoremap k gk
 
         nnoremap <silent><C-e> :NERDTree<CR>
-        
+    "???どっちか   
     "Alt key カーソル位置を移動する前に戻す
-        nnoremap <M-Right> <C-i>
-        nnoremap <M-Left> <C-o>
+""        nnoremap <M-Right> <C-i>
+""        nnoremap <M-Left> <C-o>
 
     "'Browser page reading short cut' application
         nnoremap <C-Up> gg
         nnoremap <C-Down> <S-g>
-        nnoremap <Home> gg
+        "?コマンドは1種類
+        ""nnoremap <Home> gg
 
 "これを有効にすればCtrl+Tabが利用できるようになるが、別途インストールが必要なため、導入をしない。よってCtrl+Tabによるショートカットは利用しない
 "        *vt100.translation: #override \n\
@@ -119,56 +145,41 @@ if &t_Co> 1
             nnoremap <C-Tab> <C-w><C-w>
         endif
 
-        nnoremap <C-Tab> :echo "abc"<CR>
+        ""nnoremap <C-Tab> :echo "abc"<CR>
 
     "if サーチモードがオンの時のみにしたい
-        nmap <Tab> n
-        nmap <S-Tab> <S-n>
+"        nmap <Tab> n
+"        nmap <S-Tab> <S-n>
 "       nnoremap <Tab> >>
 "       nnoremap \<C-i> <C-i>
 
     "'Edit short cut' application
         nnoremap <C-z> u
+"        inoremap <C-z> <Esc>ui
         nnoremap <C-y> <C-r>
+"        inoremap <C-y> <Esc><C-r>
         nnoremap <C-f> /
-        
+        inoremap <C-f> <Esc>/
+
 "        nnoremap <S-Up> v
 "        nnoremap <S-Down> v
-        nnoremap <S-Left> v
-        nnoremap <S-Right> v
+"v覚えてもらう
+"        nnoremap <S-Left> v
+"        nnoremap <S-Right> v
+
+        nnoremap <C-s> :w
         xnoremap <C-x> d
         xnoremap <C-c> y
         nnoremap <C-v> p
+        inoremap <C-v> <Esc>pi
+
         noremap <C-a> ggVG
+"数字指定してインデントする
         xnoremap <Tab> >
         xnoremap <S-Tab> <
         
-    "open .vimrc , just now
-        nnoremap <F5> :<C-u>split $MYVIMRC<CR>
-        nnoremap <F6> :<C-u>source $MYVIMRC<CR>
-"                    \ :source $MYGVIMRC<CR>
-    "Individual Key Mapping
-    if 1
-        noremap Y y$
-	    nnoremap \ *
-	    nnoremap ^ $
-"	    nnoremap <S-^> ^
-        nnoremap <S-w> b
-        nnoremap <C-u> g;
-"        nnoremap <C-r> g,
-        
-    endif   
-    
-    command! DoSomething call WriteQuit()
-    function! WriteQuit()
-        write
-        quit
-    endfunction
-
-    augroup vimrc-awrite
-        autocmd!
-""        autocmd func_name * w
-    augroup END
+""        nnoremap <S-Space> 
+""        nnoremap <Space> 
 
 endif
 "-----------------------------------------------------------
@@ -185,28 +196,26 @@ endif
 set laststatus=2
 "----------------------------------------------------------
 " 全角スペースの表示 for ZenkakuSpace
-" http://inari.hatenablog.com/entry/2014/05/05/231307
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-endfunction
+" 名無しのvim使いさん著、Vimテクニックバイブルp43参照
+scriptencoding utf-8
+augroup highlightIdegraphicSpace
+    autocmd!
+    autocmd ColorScheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+    autocmd VimEnter,WinEnter * match IdeographicSpace /　/
+augroup END
 
-if has('syntax')
-        augroup ZenkakuSpace
-            autocmd!
-            autocmd ColorScheme * call ZenkakuSpace()
-            autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
-        augroup END
-        call ZenkakuSpace()
-endif
-
+"これ以降でカラースキーム設定しなければ、エラーが出るらしい"
+colorscheme molokai
 "---------------------------------------------------------
 "予測変換 auto correct indicater
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
-set completeopt=menuone
-for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
-	exec "imap " . k . " " . k . "<C-N><C-P>"
-endfor
-imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
+"補完候補が一つでもポップアップ表示
+"set completeopt=menuone
+"文字列を一文字ずつ分割して文字のリストにする
+"for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
+"	exec "imap " . k . " " . k . "<C-N><C-P>"
+"endfor
+"imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 
 "---------------------------------------------------------
 "dein Scripts
@@ -230,10 +239,55 @@ if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
 "~~~My Plugins here~~~
 "	call dein#add({path to dein.vim directory})
-	call dein#add('Shougo/neocomplete.vim')
-	call dein#add('Shougo/deoplete.nvim')
+
+    call dein#add('Shougo/neocomplcache')
+        let g:acp_enableAtStartup = 0
+        let g:neocomplcache_enable_at_startup = 1
+        let g:neocomplcache_enable_smart_case = 1
+        let g:neocomplcache_min_syntax_length = 3
+        let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+        
+
+
+
+"    call dein#add('Shougo/neocomplete.vim')
+    " comment : vim7.3以上かつ、luaが導入されていることが必要
+"   " comment : need lcd 
+"               vim用の補完プラグイン
+"               (sudo apt-get install lua5.2)でもluaが有効にならなかった
+"	call dein#add('Shougo/deoplete.nvim')
+"	" comment : neovim用の補完プラグイン
+"	            ソースファイルはpython3で書く
+"	            python3の難易度はかなり低く、サンプルを見れば書き換え可能とのこと
 "	call dein#add('Shougo/unite.vim') 
     " comment : need python3 install
+    "           ファイルの操作をvimでやる
+
+    call dein#add('Shougo/vimshell.vim')
+    " comment : ':VimShell'
+    call dein#add('Shougo/vimproc')
+    " comment : vimの高速化
+
+   call dein#add('Shougo/neosnippet')
+   call dein#add('Shougo/neosnippet-snippets')
+
+        imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+        smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+        "SuperTab like snippets behavior.
+        imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+        smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+        
+        " For snippet_complete marker.
+        if has('conceal')
+            set conceallevel=2 concealcursor=i
+        endif
+
+        let g:neocomplcache_dictionary_filetype_lists = {
+            \ 'default' : '',
+            \ 'hentai' : $HOME.'/dotfiles/dict/hentai.dict',
+            \}
+        let g:neosnippet#snippets_directory = '~/dotfiles/snipmate/'
 
     call dein#add('haya14busa/incsearch.vim')
         nmap / <Plug>(incsearch-forward)
@@ -288,6 +342,9 @@ if dein#load_state(s:dein_dir)
     "可視化領域のサイズを指定
     let g:indent_guides_guide_size = 1
     "set background=dark
+
+    call dein#add('Shougo/denite.nvim')
+""    call dein#add('Shougo/denite.nvim')
 
 "	call dein#add('')
 " --- Please add new plugin ---
