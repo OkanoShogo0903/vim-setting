@@ -24,7 +24,7 @@ if &t_Co> 1
         let badwolf=0
         let goodwolf=0
 
-        colorscheme molokai
+"        colorscheme molokai
 "	    if     g:sheme == 'molokai'
 "	        let g:molokai_original = 1
 "	        let g:rehash256 = 1
@@ -170,7 +170,7 @@ if &t_Co> 1
         nnoremap <C-s> :w
         xnoremap <C-x> d
         xnoremap <C-c> y
-        nnoremap <C-v> p
+"        nnoremap <C-v> p
         inoremap <C-v> <Esc>pi
 
         noremap <C-a> ggVG
@@ -205,7 +205,6 @@ augroup highlightIdegraphicSpace
 augroup END
 
 "これ以降でカラースキーム設定しなければ、エラーが出るらしい"
-colorscheme molokai
 "---------------------------------------------------------
 "予測変換 auto correct indicater
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
@@ -240,12 +239,12 @@ if dein#load_state(s:dein_dir)
 "~~~My Plugins here~~~
 "	call dein#add({path to dein.vim directory})
 
-    call dein#add('Shougo/neocomplcache')
-        let g:acp_enableAtStartup = 0
-        let g:neocomplcache_enable_at_startup = 1
-        let g:neocomplcache_enable_smart_case = 1
-        let g:neocomplcache_min_syntax_length = 3
-        let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"    call dein#add('Shougo/neocomplcache')
+"        let g:acp_enableAtStartup = 0
+"        let g:neocomplcache_enable_at_startup = 1
+"        let g:neocomplcache_enable_smart_case = 1
+"        let g:neocomplcache_min_syntax_length = 3
+"        let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
         
 
 
@@ -268,27 +267,27 @@ if dein#load_state(s:dein_dir)
     call dein#add('Shougo/vimproc')
     " comment : vimの高速化
 
-   call dein#add('Shougo/neosnippet')
-   call dein#add('Shougo/neosnippet-snippets')
-
-        imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-        smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"   call dein#add('Shougo/neosnippet')
+"   call dein#add('Shougo/neosnippet-snippets')
+"
+"        imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"        smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 
         "SuperTab like snippets behavior.
-        imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-        smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"        imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+"        smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
         
         " For snippet_complete marker.
-        if has('conceal')
-            set conceallevel=2 concealcursor=i
-        endif
+"        if has('conceal')
+"            set conceallevel=2 concealcursor=i
+"        endif
 
-        let g:neocomplcache_dictionary_filetype_lists = {
-            \ 'default' : '',
-            \ 'hentai' : $HOME.'/dotfiles/dict/hentai.dict',
-            \}
-        let g:neosnippet#snippets_directory = '~/dotfiles/snipmate/'
-
+"        let g:neocomplcache_dictionary_filetype_lists = {
+"            \ 'default' : '',
+"            \ 'hentai' : $HOME.'/dotfiles/dict/hentai.dict',
+"            \ }
+"        let g:neosnippet#snippets_directory = '~/dotfiles/snipmate/'
+    
     call dein#add('haya14busa/incsearch.vim')
         nmap / <Plug>(incsearch-forward)
         map ? <plug>(incsearch-background)
@@ -307,13 +306,13 @@ if dein#load_state(s:dein_dir)
     call dein#add('osyo-manga/vim-anzu')
     " mapping
     " when you want to display it in screen,change this
-    if 1    " if 1
-        nmap n <Plug>(anzu-n-with-echo)
-        nmap N <Plug>(anzu-N-with-echo)
-    else    " if 0
-        nmap n <Plug>(anzu-mode-n)
-        nmap N <Plug>(anzu-mode-N)
-    endif
+        if 1    " if 1
+            nmap n <Plug>(anzu-n-with-echo)
+            nmap N <Plug>(anzu-N-with-echo)
+        else    " if 0
+            nmap n <Plug>(anzu-mode-n)
+            nmap N <Plug>(anzu-mode-N)
+        endif
         nmap * <Plug>(anzu-star-with-echo)
         nmap # <Plug>(anzu-sharp-with-echo) 
     " clear status
@@ -367,5 +366,5 @@ filetype plugin indent on
 if dein#check_install()
 	call dein#install()
 endif
-
+        
 "-----------------------------------------------------------
