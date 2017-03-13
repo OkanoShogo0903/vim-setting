@@ -1,6 +1,15 @@
 snippet auto_write
 alias robo
+    //--情報テンプレート-----------------------------------
     Writer    : ${1:WRITER}
     Date      : ${2:DATE}
     Comment   : ${3:COMMENT}
+    //-----------------------------------------------------
 
+snippet hentai_advent
+alias ha
+    このエントリは、${1:DATE}日目です。一日目は${2:WHO}さんの「${3:PREV_TITLE}」でした。
+    ${0:TARGET}
+    
+    明日は${4:WHO_NEXT}さんです。
+        
