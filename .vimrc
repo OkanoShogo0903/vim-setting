@@ -234,20 +234,19 @@ if &runtimepath !~# '/dein.vim'
 	execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-if dein#load_state(s:dein_dir)
+colorscheme monokai
+"if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
 "~~~My Plugins here~~~
 "	call dein#add({path to dein.vim directory})
 
-"    call dein#add('Shougo/neocomplcache')
-"        let g:acp_enableAtStartup = 0
-"        let g:neocomplcache_enable_at_startup = 1
-"        let g:neocomplcache_enable_smart_case = 1
-"        let g:neocomplcache_min_syntax_length = 3
-"        let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-        
-
-
+    call dein#add('Shougo/neocomplcache')
+        let g:acp_enableAtStartup = 0
+        let g:neocomplcache_enable_at_startup = 1
+        let g:neocomplcache_enable_smart_case = 1
+        let g:neocomplcache_min_syntax_length = 3
+        let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+    
 
 "    call dein#add('Shougo/neocomplete.vim')
     " comment : vim7.3以上かつ、luaが導入されていることが必要
@@ -267,26 +266,26 @@ if dein#load_state(s:dein_dir)
     call dein#add('Shougo/vimproc')
     " comment : vimの高速化
 
-"   call dein#add('Shougo/neosnippet')
-"   call dein#add('Shougo/neosnippet-snippets')
-"
-"        imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"        smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+   call dein#add('Shougo/neosnippet')
+   call dein#add('Shougo/neosnippet-snippets')
+
+        imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+        smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 
         "SuperTab like snippets behavior.
-"        imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-"        smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+        imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+        smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
         
         " For snippet_complete marker.
-"        if has('conceal')
-"            set conceallevel=2 concealcursor=i
-"        endif
+        if has('conceal')
+            set conceallevel=2 concealcursor=i
+        endif
 
-"        let g:neocomplcache_dictionary_filetype_lists = {
-"            \ 'default' : '',
-"            \ 'hentai' : $HOME.'/dotfiles/dict/hentai.dict',
-"            \ }
-"        let g:neosnippet#snippets_directory = '~/dotfiles/snipmate/'
+        let g:neocomplcache_dictionary_filetype_lists = {
+            \ 'default' : '',
+            \ 'hentai' : $HOME.'/dotfiles/dict/hentai.dict',
+            \ }
+        let g:neosnippet#snippets_directory = '~/dotfiles/snipmate/'
     
     call dein#add('haya14busa/incsearch.vim')
         nmap / <Plug>(incsearch-forward)
@@ -306,7 +305,7 @@ if dein#load_state(s:dein_dir)
     call dein#add('osyo-manga/vim-anzu')
     " mapping
     " when you want to display it in screen,change this
-        if 1    " if 1
+        if 0    " if 1
             nmap n <Plug>(anzu-n-with-echo)
             nmap N <Plug>(anzu-N-with-echo)
         else    " if 0
@@ -316,7 +315,7 @@ if dein#load_state(s:dein_dir)
         nmap * <Plug>(anzu-star-with-echo)
         nmap # <Plug>(anzu-sharp-with-echo) 
     " clear status
-"        nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+        nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
     " statusline
         set statusline=%{anzu#search_status()}
     " comment :
@@ -342,8 +341,8 @@ if dein#load_state(s:dein_dir)
     let g:indent_guides_guide_size = 1
     "set background=dark
 
-    call dein#add('Shougo/denite.nvim')
-""    call dein#add('Shougo/denite.nvim')
+"    call dein#add('Shougo/denite.nvim')
+    "unite reinforce
 
 "	call dein#add('')
 " --- Please add new plugin ---
@@ -358,7 +357,7 @@ if dein#load_state(s:dein_dir)
 "~~~My plugin end~~~
 	call dein#end()
 	call dein#save_state()
-endif
+"endif
 
 filetype plugin indent on
 
