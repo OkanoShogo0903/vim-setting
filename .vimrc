@@ -195,6 +195,24 @@ endif
 
 set laststatus=2
 "----------------------------------------------------------
+"クリップボードの貼り付け時に変にインデントされない
+"http://qiita.com/ringo/items/bb9cf61a3ccfe6183c7b
+if &term =~ "xterm"
+    let &t_ti .= "\e[?2004h"
+    let &t_te .= "\e[?2004l"
+    let &pastetoggle = "\e[201~"
+
+    function XTermPasteBegin(ret)
+        set paste
+        return a:ret
+    endfunction
+
+    noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
+    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+    cnoremap <special> <Esc>[200~ <nop>
+    cnoremap <special> <Esc>[201~ <nop>
+endif
+"----------------------------------------------------------
 " 全角スペースの表示 for ZenkakuSpace
 " 名無しのvim使いさん著、Vimテクニックバイブルp43参照
 scriptencoding utf-8
@@ -235,6 +253,7 @@ if &runtimepath !~# '/dein.vim'
 endif
 
 colorscheme monokai
+
 "if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
 "~~~My Plugins here~~~
@@ -266,16 +285,23 @@ colorscheme monokai
     call dein#add('Shougo/vimproc')
     " comment : vimの高速化
 
-   call dein#add('Shougo/neosnippet')
-   call dein#add('Shougo/neosnippet-snippets')
-
+    call dein#add('Shougo/neosnippet')
+    call dein#add('Shougo/neosnippet-snippets')
+    " comment : http://kazuph.hateblo.jp/entry/2013/01/19/193745
+    
+        " <TAB>: completion.
+        " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+        inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+        
+        " Plugin key-mappings
         imap <C-k>     <Plug>(neosnippet_expand_or_jump)
         smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-
-        "SuperTab like snippets behavior.
-        imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-        smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
         
+        " SuperTab like snippets behavior.
+        " imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+        imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+        smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+            
         " For snippet_complete marker.
         if has('conceal')
             set conceallevel=2 concealcursor=i
@@ -283,7 +309,7 @@ colorscheme monokai
 
         let g:neocomplcache_dictionary_filetype_lists = {
             \ 'default' : '',
-            \ 'hentai' : $HOME.'/dotfiles/dict/hentai.dict',
+            \ 'robocup' : $HOME.'/dotfiles/dict/robocup.dict',
             \ }
         let g:neosnippet#snippets_directory = '~/dotfiles/snipmate/'
     
