@@ -8,8 +8,15 @@
 " 書き方がわからない場合は「vimrc」等で検索すればいろいろでてくるはず
 "---------------------------------------------------------
 "colorscheme
-colorscheme monokai
+"
+    colorscheme monokai
+"    colorscheme molokai
+"    colorscheme badwolf
+"    colorscheme goodwolf
+"    colorscheme kitchen
 
+" 背景を透けさせる
+"    highlight Normal ctermbg=none
 "---------------------------------------------------------
 "auto correct
         "limit of auto correct

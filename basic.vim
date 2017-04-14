@@ -8,26 +8,7 @@
     syntax enable
 "    source color.vimrc
         set hlsearch
-
-        let monokai=0
-        let molokai=1
-        let kitchen=0
-        let badwolf=0
-        let goodwolf=0
-
-"        let s:scheme = molokai
-"	    execute 'colorscheme ' . s:scheme 
-"	    execute 'colorscheme ' . fnamemodify(molokai, ':p')
-"        execute colorscheme fnamemodify(g:scheme, ':p')
-
-"        colorscheme molokai
-"	    if     g:sheme == 'molokai'
-"	        let g:molokai_original = 1
-"	        let g:rehash256 = 1
-"	    elseif g:sheme == 'badwolf'
-"	        highlight Normal ctermbg=none
- "       endif
-        
+      
         set t_Co=256
 "==============================================
 "syntax color   
@@ -152,7 +133,10 @@
 "        nnoremap <S-Left> v
 "        nnoremap <S-Right> v
 
-        nnoremap <C-s> :w
+	    "nmap <Esc><Esc> :nohlsearch<CR><Esc>
+"        nmap <C-s> :w<CR>
+"        imap <C-s> <Esc>:w<CR>
+
         xnoremap <C-x> d
         xnoremap <C-c> y
 "        nnoremap <C-v> p
@@ -190,14 +174,14 @@ augroup END
 
 "これ以降でカラースキーム設定しなければ、エラーが出るらしい"
 "---------------------------------------------------------
+if has('nvim')
 "予測変換 auto correct indicater
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 "補完候補が一つでもポップアップ表示
-"set completeopt=menuone
-"文字列を一文字ずつ分割して文字のリストにする
-"for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
-"	exec "imap " . k . " " . k . "<C-N><C-P>"
-"endfor
-"imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
-
-
+    set completeopt=menuone
+    "文字列を一文字ずつ分割して文字のリストにする
+    for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
+        exec "imap " . k . " " . k . "<C-N><C-P>"
+    endfor
+    imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
+endif

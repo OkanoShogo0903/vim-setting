@@ -5,7 +5,7 @@
 " セットアップの方法についてはドリームラボ参照
 "
 " 個人の設定は ~/.vim/basic.vim
-" 個人のプラグイン設定は ~/.vim/plug.vim と ~/.vim/rc/mydein.toml
+" 個人のプラグイン設定は ~/.vim/plug.vim と ~/.vim/my_dein.toml
 " 
 " ロボカップ全体の設定は ~/dotfiles/basic.vim
 " ロボカップ全体のプラグイン設定は ~/dotfiles/plug.vim と ~/.v
@@ -59,19 +59,20 @@ if dein#check_install()
 endif
 
 "-----------------------------------------------------------
+"set runtimepath+=~/dotfiles/
+"runtime! etc/*.vim 
+
 "Read script about Plugin
-"
-"let g:dot_dir	= expand('~/dotfile')
-"let s:dot_toml		= g:dot_dir . '/dein.toml'
-"let s:dot_lazy_toml = g:dot_dir . '/dein_lazy.toml'
-"let s:dot_plug = g:dot_dir . '/plug.vim'
-"let s:dot_basic = g:dot_dir . '/basic.vim'
 
 if filereadable(expand('~/dotfiles/plug.vim'))
     source ~/dotfiles/plug.vim
+else
+    echo "err 1"
 endif
-if filereadable(expand('~/dotfiles/etc/plug.vim'))
-    source ~/dotfiles/etc/plug.vim
+if filereadable(expand('~/.vim/plug.vim'))
+    source ~/.vim/plug.vim
+else
+    echo "err 2"
 endif
 
 "-----------------------------------------------------------
@@ -79,10 +80,14 @@ endif
 
 if filereadable(expand('~/dotfiles/basic.vim'))
     source ~/dotfiles/basic.vim
+else
+    echo "err 3"
 endif
 
-if filereadable(expand('~/dotfiles/etc/basic.vim'))
-    source ~/dotfiles/etc/basic.vim
+if filereadable(expand('~/.vim/basic.vim'))
+    source ~/.vim/basic.vim
+else
+    echo "err 4"
 endif
 
 "-----------------------------------------------------------
