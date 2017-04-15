@@ -51,7 +51,6 @@
 	    set encoding=utf-8
 	    set fileencoding=utf-8
 	    set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
-
 "==============================================
 "Back up
         set nobackup
@@ -60,6 +59,7 @@
 "Other ???
 	    set showmode
         set helplang=ja
+        set clipboard=unnamed,autoselect
 "==============================================
 "KeyMapping
 
@@ -78,8 +78,6 @@
         inoremap ' ''<Left>
         inoremap < <><Left>
         "imap / //<Left>   // for rudy
-
-        
 
     "move the display line-by-line
         nnoremap j gj
@@ -149,6 +147,11 @@
         
 ""        nnoremap <S-Space> 
 ""        nnoremap <Space> 
+    
+    inoremap <S-Tab> <Esc><<i
+
+    "入力モードで素早くjjしてエスケープ
+    inoremap jj <Esc>
 
 "-----------------------------------------------------------
 "カーソル位置の保存
@@ -174,7 +177,7 @@ augroup END
 
 "これ以降でカラースキーム設定しなければ、エラーが出るらしい"
 "---------------------------------------------------------
-if has('nvim')
+if !has('nvim')
 "予測変換 auto correct indicater
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 "補完候補が一つでもポップアップ表示
@@ -185,3 +188,49 @@ if has('nvim')
     endfor
     imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 endif
+"----------------------------------------------------------
+"コマンドで、対応する'h'もしくは'cpp'を開く
+    command! OpenFile call OpenFileFunc()
+    command! Of call OpenFileFunc()
+    function! OpenFileFunc()
+
+"cppならhを、hならcppを開くようにする
+        let l:file_name = expand("%:r")
+
+        if expand("%:e")=="h"
+            let l:extension = expand("cpp")
+        elseif expand("%:e")=="cpp"
+            let l:extension = expand("h")
+        else
+            echo "Not available"
+            return '0'
+        endif
+
+"splitで開く        
+        if filereadable(l:file_name . '.' . l:extension)
+            let l:ex_code = l:file_name . '.' . l:extension
+            execute 'split ' . l:ex_code
+            return '1'
+        endif
+
+    endfunction
+"==============================================
+"自動で、対応する'h'もしくは'cpp'を開く
+"    autocmd BufNewFile *.cpp 0r $HOME/.vim/comment.txt
+    
+"グループ作る遊び
+    let g:open_file_auto_enable = 0
+    augroup OpenFiles
+        autocmd!
+        if g:open_file_auto_enable
+            autocmd BufNewFile,BufRead *.cpp,*.h call OpenFileAutoFunc()
+        endif
+""        autocmd func_name * w
+    augroup END
+
+    function! OpenFileAutoFunc()
+        if OpenFileFunc()
+"            normal <C-w>w
+        endif
+    endfunction
+"----------------------------------------------------------

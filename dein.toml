@@ -83,3 +83,7 @@ repo = 'vim-scripts/autodate.vim'
 [[plugins]] # Toml
 repo  = 'cespare/vim-toml'
 on_ft = 'toml'
+
+[[plugins]]
+repo = 'tyru/eskk.vim'
+
