@@ -153,6 +153,11 @@
     "入力モードで素早くjjしてエスケープ
     inoremap jj <Esc>
 
+    "open vimrc
+        nnoremap <F5> :<C-u>split ~/.vim/basic.vim<CR>
+        nnoremap <F6> :<C-u>source $MYVIMRC<CR>
+"                    \ :source $MYGVIMRC<CR>
+
 "-----------------------------------------------------------
 "カーソル位置の保存
 "move cursor the last edit part
