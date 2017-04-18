@@ -36,7 +36,7 @@
 " : /や?での検索ヒット時に、現在の検索位置を表示する
     " mapping
     " when you want to display it in screen,change this
-        if 0    " if 1
+        if 1    " if 1
             nmap n <Plug>(anzu-n-with-echo)
             nmap N <Plug>(anzu-N-with-echo)
         else    " if 0
