@@ -29,7 +29,8 @@
 	    set ignorecase
 	    set showmatch
 	    set matchtime=1
-"=============================================="search
+"==============================================
+""search
 	    set incsearch
 "==============================================
 "display
@@ -196,7 +197,7 @@ endif
 "----------------------------------------------------------
 "コマンドで、対応する'h'もしくは'cpp'を開く
     command! OpenFile call OpenFileFunc()
-    command! Of call OpenFileFunc()
+    command! OF call OpenFileFunc()
     function! OpenFileFunc()
 
 "cppならhを、hならcppを開くようにする
@@ -214,7 +215,7 @@ endif
 "splitで開く        
         if filereadable(l:file_name . '.' . l:extension)
             let l:ex_code = l:file_name . '.' . l:extension
-            execute 'split ' . l:ex_code
+            execute 'vs ' . l:ex_code
             return '1'
         endif
 
