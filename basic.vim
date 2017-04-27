@@ -156,7 +156,8 @@
 
     "open vimrc
         nnoremap <F5> :<C-u>split ~/.vim/basic.vim<CR>
-        nnoremap <F6> :<C-u>source $MYVIMRC<CR>
+        nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
+"        nnoremap <F6> :<C-u>source $MYVIMRC<CR>
 "                    \ :source $MYGVIMRC<CR>
 
 "-----------------------------------------------------------
