@@ -77,7 +77,7 @@
         inoremap ( ()<Left>
         inoremap " ""<Left>
         inoremap ' ''<Left>
-        inoremap < <><Left>
+"        inoremap < <><Left>
         "imap / //<Left>   // for rudy
 
     "move the display line-by-line
@@ -157,7 +157,7 @@
     "open vimrc
         nnoremap <F5> :<C-u>split ~/.vim/basic.vim<CR>
         nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
-"        nnoremap <F6> :<C-u>source $MYVIMRC<CR>
+        nnoremap <F7> :<C-u>source $MYVIMRC<CR>
 "                    \ :source $MYGVIMRC<CR>
 
 "-----------------------------------------------------------
