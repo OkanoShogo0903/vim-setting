@@ -20,6 +20,7 @@
 	    set tabstop=4
 	    set shiftwidth=4
 	    set expandtab	"make 'tab' 'space' for color indent custom
+"        set retab
         set shiftround
 
 "==============================================
@@ -227,7 +228,7 @@ endif
     
 "グループ作る遊び
     let g:open_file_auto_enable = 0
-    augroup OpenFiles
+    augroup Robocup-vimrc
         autocmd!
         if g:open_file_auto_enable
             autocmd BufNewFile,BufRead *.cpp,*.h call OpenFileAutoFunc()
@@ -241,3 +242,12 @@ endif
         endif
     endfunction
 "----------------------------------------------------------
+"タブをスペース4つに変換
+    augroup ConvertTabsToSpaces
+        autocmd!
+            autocmd BufRead *.cpp,*.h execute 'retab'
+"           autocmd BufRead *.cpp,*.h execute '%!expand -t 4'
+    augroup END
+"----------------------------------------------------------
+
+
