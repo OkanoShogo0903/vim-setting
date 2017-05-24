@@ -74,7 +74,8 @@
     "           paint ward after ':OverCommandLine'!
 "---------------------------------------------------
 "['ConradIrwin/vim-bracketed-paste']
-" : ペーストするときにpastemodeにして、インデント
+" : ペーストするときにpastemodeにする
+" : これによってネットのプログラムをコピペするときにインデントされるのを防ぐ
 "---------------------------------------------------
 "['scrooloose/nerdcommenter']
 " : コメントアウトプラグイン

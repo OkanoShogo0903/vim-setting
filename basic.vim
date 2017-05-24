@@ -41,6 +41,8 @@
 	    set display=lastline
 
 "==============================================
+"statusline
+
 "ステータスラインの色をノーマルモードと挿入モードで区別する
 "guifg = FrontGround
 "guibg = BackGround
@@ -48,6 +50,8 @@
 "        au InsertEnter * hi statusLine guifg=DarkBlue guibg=DarkGray gui=none ctermfg=Blue ctermbg=DarkGray cterm=none
 "        au InsertLeave * hi statusLine guifg=DarkBlue guibg=DarkGray gui=none ctermfg=Blue ctermbg=DarkGray cterm=none
 
+    set statusline+=%{matchstr(hostname(),'\\w\\+')}@
+    
 "==============================================
 "Character code
 	    set encoding=utf-8
@@ -61,6 +65,8 @@
 "Other ???
 	    set showmode
         set helplang=ja
+        ":version"で+clipboardになってないと機能しない。
+        "その場合は端末のヴァージョンアップが必要になる
         set clipboard=unnamed,autoselect
 "==============================================
 "KeyMapping
@@ -73,11 +79,11 @@
     "basic
 	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-        inoremap { {}<Left>
-        inoremap [ []<Left>
-        inoremap ( ()<Left>
-        inoremap " ""<Left>
-        inoremap ' ''<Left>
+"        inoremap { {}<Left>
+"        inoremap [ []<Left>
+"        inoremap ( ()<Left>
+"        inoremap " ""<Left>
+"        inoremap ' ''<Left>
 "        inoremap < <><Left>
         "imap / //<Left>   // for rudy
 
@@ -106,8 +112,8 @@
 
     "Ctrl + Tab が使えないため、保留
         if 0
-            nnoremap <C-w> :close<CR>
-            nnoremap <C-Tab> :echo "bbb"<CR>
+            nnoremap <C-w> :<C-u>close<CR>
+            nnoremap <C-Tab> :<C-u>echo "bbb"<CR>
             nnoremap <C-Tab> <C-w><C-w>
         endif
 
@@ -156,8 +162,15 @@
     inoremap jj <Esc>
 
     "open vimrc
+        nmap <F1> :<C-u>!eog ~/dotfiles/doc/cheatsheet_1366x768.png<CR>
+        nnoremap <F2> :<C-u>!eog ~/dotfiles/doc/cheatsheet_1366x768.png<CR>
+
         nnoremap <F5> :<C-u>split ~/.vim/basic.vim<CR>
+        nnoremap <S-F5> :<C-u>split ~/dotfiles/basic.vim<CR>
+
         nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
+        nnoremap <S-F6> :<C-u>split ~/dotfiles/plug.vim<CR>
+
         nnoremap <F7> :<C-u>source $MYVIMRC<CR>
 "                    \ :source $MYGVIMRC<CR>
 
