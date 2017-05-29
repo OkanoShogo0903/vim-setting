@@ -67,6 +67,7 @@
 "    let autodate_lines=100
 "    let autodate_start_line=-1
     let autodate_format="%Y/%m/%d"
+
 "---------------------------------------------------
 "['osyo-manga/vim-over']
 " : 置換時に、対象文字列をハイライトする
