@@ -162,14 +162,14 @@
     inoremap jj <Esc>
 
     "open vimrc
-        nmap <F1> :<C-u>!eog ~/dotfiles/doc/cheatsheet_1366x768.png<CR>
-        nnoremap <F2> :<C-u>!eog ~/dotfiles/doc/cheatsheet_1366x768.png<CR>
+        nmap <F1> :<C-u>!eog ~/vim_settings/doc/cheatsheet_1366x768.png<CR>
+        nnoremap <F2> :<C-u>!eog ~/vim_settings/doc/cheatsheet_1366x768.png<CR>
 
         nnoremap <F5> :<C-u>split ~/.vim/basic.vim<CR>
-        nnoremap <S-F5> :<C-u>split ~/dotfiles/basic.vim<CR>
+        nnoremap <S-F5> :<C-u>split ~/vim_settings/basic.vim<CR>
 
         nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
-        nnoremap <S-F6> :<C-u>split ~/dotfiles/plug.vim<CR>
+        nnoremap <S-F6> :<C-u>split ~/vim_settings/plug.vim<CR>
 
         nnoremap <F7> :<C-u>source $MYVIMRC<CR>
 "                    \ :source $MYGVIMRC<CR>

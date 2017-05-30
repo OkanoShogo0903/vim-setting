@@ -66,7 +66,7 @@ let g:airline_theme = 'behelit'
 "[Shougo/neosnippet-snippets]
 " : 「スニペット」: 定型文
 " : neocomplcache等のShougo氏作成の補完系プラグインが必須
-" : ~/dotfiles/dictで辞書登録してる
+" : ~/vim_settings/dictで辞書登録してる
 " : http://kazuph.hateblo.jp/entry/2013/01/19/193745
     " <TAB>: completion.
     " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -88,9 +88,9 @@ let g:airline_theme = 'behelit'
 
     let g:neocomplcache_dictionary_filetype_lists = {
         \ 'default' : '',
-        \ 'robocup' : $HOME.'/dotfiles/dict/robocup.dict',
+        \ 'robocup' : $HOME.'/vim_settings/dict/robocup.dict',
         \ }
-    let g:neosnippet#snippets_directory = '~/dotfiles/snipmate/'
+    let g:neosnippet#snippets_directory = '~/vim_settings/snipmate/'
 
 "---------------------------------------------------
 "['scrooloose/nerdtree']
