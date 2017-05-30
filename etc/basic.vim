@@ -1,21 +1,29 @@
 "---------------------------------------------------------
 " my basic
 " 
-" $B8D?M$N@_Dj$r=q$/>l=j(B
+" 個人の設定を書く場所
 " 
-" vimscript$B$G=q$$$F$M(B
-" ~/dotfiles/basic.vim $B$_$l$PBgBN$N=q$-J}$OJ,$+$k$H;W$&(B
-" $B=q$-J}$,$o$+$i$J$$>l9g$O!V(Bvimrc$B!WEy$G8!:w$9$l$P$$$m$$$m$G$F$/$k$O$:(B
+" vimscriptで書いてね
+" ~/dotfiles/basic.vim みれば大体の書き方は分かると思う
+" 書き方がわからない場合は「vimrc」等で検索すればいろいろでてくるはず
 "---------------------------------------------------------
 "colorscheme
-"
-    colorscheme monokai
-"    colorscheme molokai
+"    好きなカラースキームを有効にしよう
+    colorscheme default
+
+    colorscheme molokai
+"    colorscheme monokai
 "    colorscheme badwolf
 "    colorscheme goodwolf
 "    colorscheme kitchen
+"    colorscheme shine
+"    colorscheme tender
+"    colorscheme pencil
+"    colorscheme kalisi
+"    colorscheme moonshine_minimal
+"    colorscheme moonshine_lowcontrast
 
-" $BGX7J$rF)$1$5$;$k(B
+" 背景を透けさせる
 "    highlight Normal ctermbg=none
 "---------------------------------------------------------
 "auto correct
@@ -27,5 +35,4 @@
         hi Pmenu        ctermfg=Black ctermbg=Grey
         hi PmenuSel     ctermbg=Blue
         hi PmenuSbar    ctermbg=Cyan
-
 

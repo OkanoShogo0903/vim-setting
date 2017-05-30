@@ -22,12 +22,30 @@
 "let g:airline_theme = 'molokai'
 "let g:airline_theme = 'luna'
 "let g:airline_theme = 'bubblegum'
-let g:airline_theme = 'sol'
-let g:airline_theme = 'papercolor'
+"let g:airline_theme = 'sol'
+"let g:airline_theme = 'papercolor'
+"let g:airline_theme = 'base16'
+let g:airline_theme = 'behelit'
+"let g:airline_theme = 'jellybeans'
+"let g:airline_theme = 'luna'
+"let g:airline_theme = 'tomorrow'
 
 "---------------------------------------------------
 "[Shougo/neocomplcache]
 " : 入力補完用プラグイン
+
+    "インサートモードで移動中に候補選択しない
+"    let g:NeoComplCache_TagsAutoUpdate = 1  
+"    let g:NeoComplCache_EnableInfo = 1  
+"    let g:NeoComplCache_EnableCamelCaseCompletion = 1  
+"    let g:NeoComplCache_EnableSkipCompletion = 1  
+"    let g:NeoComplCache_SkipInputTime = '0.5'  
+"    inoremap  pumvisible() ? neocomplcache#close_popup()."\" : "\"  
+"    inoremap  pumvisible() ? neocomplcache#close_popup()."\" : "\"  
+
+"    let g:neocomplcache_enable_insert_char_pre = 1
+    
+    "基本設定
     let g:acp_enableAtStartup = 0
     let g:neocomplcache_enable_at_startup = 1
     let g:neocomplcache_enable_smart_case = 1
@@ -35,7 +53,7 @@ let g:airline_theme = 'papercolor'
     let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
     " 一番目の候補を自動選択
-    let g:neocomplcache_enable_auto_select = 1
+    let g:neocomplcache_enable_auto_select = 0
     " 補完候補の数
     let g:neocomplcache_max_list = 5
     " 選択して改行されないようにする
@@ -110,9 +128,21 @@ let g:airline_theme = 'papercolor'
     let g:indent_guides_guide_size = 1
 
 "---------------------------------------------------
-"[]
-" : 
-" : 
+" タイムライン選択用の Unite を起動する
+nnoremap <silent> t :Unite tweetvim<CR>
+" 発言用バッファを表示する
+"nnoremap <silent> s           :<C-u>TweetVimSay<CR>
+" mentions を表示する
+"nnoremap <silent> <Space>re   :<C-u>TweetVimMentions<CR>
+" 特定のリストのタイムラインを表示する
+nnoremap <silent> <Space>tt   :<C-u>TweetVimListStatuses basyura vim<CR>
+
+" スクリーン名のキャッシュを利用して、neocomplcache で補完する
+if !exists('g:neocomplcache_dictionary_filetype_lists')
+  let g:neocomplcache_dictionary_filetype_lists = {}
+endif
+let neco_dic = g:neocomplcache_dictionary_filetype_lists
+let neco_dic.tweetvim_say = $HOME . '/.tweetvim/screen_name'
 "---------------------------------------------------
 "[]
 " : 
