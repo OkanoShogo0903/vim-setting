@@ -12,33 +12,33 @@
         set t_Co=256
 "==============================================
 "syntax color   
-	    syntax on
+        syntax on
 
 "==============================================
 "tab   
-	    set smarttab
-	    set tabstop=4
-	    set shiftwidth=4
-	    set expandtab	"make 'tab' 'space' for color indent custom
+        set smarttab
+        set tabstop=4
+        set shiftwidth=4
+        set expandtab   "make 'tab' 'space' for color indent custom
 "        set retab
         set shiftround
 
 "==============================================
 "edit
-	    set autoindent
+        set autoindent
 "       set smartindent
-	    set ignorecase
-	    set showmatch
-	    set matchtime=1
+        set ignorecase
+        set showmatch
+        set matchtime=1
 "==============================================
 ""search
-	    set incsearch
+        set incsearch
 "==============================================
 "display
-	    set number
-	    set title
-	    set ruler
-	    set display=lastline
+        set number
+        set title
+        set ruler
+        set display=lastline
 
 "==============================================
 "statusline
@@ -54,16 +54,16 @@
     
 "==============================================
 "Character code
-	    set encoding=utf-8
-	    set fileencoding=utf-8
-	    set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+        set encoding=utf-8
+        set fileencoding=utf-8
+        set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 "==============================================
 "Back up
         set nobackup
 "       noswapfile
 "==============================================
 "Other ???
-	    set showmode
+        set showmode
         set helplang=ja
         ":version"で+clipboardになってないと機能しない。
         "その場合は端末のヴァージョンアップが必要になる
@@ -77,7 +77,7 @@
         nnoremap ZQ <Nop>
     
     "basic
-	    nmap <Esc><Esc> :nohlsearch<CR><Esc>
+        nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 "        inoremap { {}<Left>
 "        inoremap [ []<Left>
@@ -139,7 +139,7 @@
 "        nnoremap <S-Left> v
 "        nnoremap <S-Right> v
 
-	    "nmap <Esc><Esc> :nohlsearch<CR><Esc>
+        "nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "        nmap <C-s> :w<CR>
 "        imap <C-s> <Esc>:w<CR>
 
@@ -155,14 +155,14 @@
         
 ""        nnoremap <S-Space> 
 ""        nnoremap <Space> 
-    
+
     inoremap <S-Tab> <Esc><<i
 
     "入力モードで素早くjjしてエスケープ
     inoremap jj <Esc>
 
     "open vimrc
-        nmap <F1> :<C-u>!eog ~/vim_settings/doc/cheatsheet_1366x768.png<CR>
+"        nmap <F1> :<C-u>!eog ~/vim_settings/doc/cheatsheet_1366x768.png<CR>
         nnoremap <F2> :<C-u>!eog ~/vim_settings/doc/cheatsheet_1366x768.png<CR>
 
         nnoremap <F5> :<C-u>split ~/.vim/basic.vim<CR>
@@ -178,11 +178,11 @@
 "カーソル位置の保存
 "move cursor the last edit part
 if has("autocmd")
-    	filetype plugin indent on
-    	autocmd BufReadPost *
-	            \ if line("'\"") > 0 && line("'\"") <= line("$") |
-	            \ exe "normal g'\"" |
-	            \ endif
+        filetype plugin indent on
+        autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \ exe "normal g'\"" |
+                \ endif
 endif
 
 set laststatus=2
@@ -198,17 +198,17 @@ augroup END
 
 "これ以降でカラースキーム設定しなければ、エラーが出るらしい"
 "---------------------------------------------------------
-if !has('nvim')
+"if !has('nvim')
 "予測変換 auto correct indicater
 "URL : http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 "補完候補が一つでもポップアップ表示
-    set completeopt=menuone
+ "   set completeopt=menuone
     "文字列を一文字ずつ分割して文字のリストにする
-    for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
-        exec "imap " . k . " " . k . "<C-N><C-P>"
-    endfor
-    imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
-endif
+ "   for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
+ "       exec "imap " . k . " " . k . "<C-N><C-P>"
+ "   endfor
+ "   imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
+"endif
 "----------------------------------------------------------
 "コマンドで、対応する'h'もしくは'cpp'を開く
     command! OpenFile call OpenFileFunc()
@@ -239,10 +239,10 @@ endif
 "自動で、対応する'h'もしくは'cpp'を開く
 "    autocmd BufNewFile *.cpp 0r $HOME/.vim/comment.txt
     
-"グループ作る遊び
     let g:open_file_auto_enable = 0
     augroup Robocup-vimrc
         autocmd!
+
         if g:open_file_auto_enable
             autocmd BufNewFile,BufRead *.cpp,*.h call OpenFileAutoFunc()
         endif
@@ -255,6 +255,32 @@ endif
         endif
     endfunction
 "----------------------------------------------------------
+    augroup Robocup-vimrc
+        autocmd!
+        autocmd BufNewFile,BufRead *.cpp,*.h,*.vim execute 'read !stty -ixon -ixoff'
+        inoremap <C-s> <Esc>:<C-u>write<CR>a
+        nnoremap <C-s> :<C-u>write<CR>
+        xnoremap <C-s> :<C-u>write<CR>
+    augroup END
+
+"補完の  on off
+"silent 入れる
+"<C-u>もね
+"ワンラインライナーっぽく三項演算子使ってキー一つでやるか？
+"silentいれたらピンク色のエラーコードでなくなるけど、
+"それだとenableとdisenableの切替時に今どっちになったかがわからないから、そこは関数化されたechoで補完しよう
+    nnoremap @ :<C-u>NeoComplCacheDisable<CR>
+    nnoremap <C-@> :<C-u>NeoComplCacheEnable<CR>
+    command! OnOff call NeoOnOff()
+    function! NeoOnOff()
+        
+    endfunction
+
+"    xnoremap t 
+"    inoremap t 
+    
+"    autocmd BufNewFile *.cpp 0r $HOME/.vim/comment.txt
+"----------------------------------------------------------
 "タブをスペース4つに変換
     augroup ConvertTabsToSpaces
         autocmd!
@@ -262,5 +288,3 @@ endif
 "           autocmd BufRead *.cpp,*.h execute '%!expand -t 4'
     augroup END
 "----------------------------------------------------------
-
-
