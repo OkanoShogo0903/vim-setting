@@ -10,16 +10,20 @@ CUIのとっつきにくさのために敬遠されがちです。
 "vim改造資料"を参照してください
 
 # ファイル、ディレクトリの説明
-・basic.vim
+* basic.vim
+
   基本設定
 
-・plug.vim  プラグインの設定
+* plug.vim
 
-・dein.toml
+  プラグインの設定
+
+* dein.toml
     設定記述用の言語tomlでプラグイン設定を分離してる
 
-・dein_lazy.toml
-    dein.tomlより遅れたタイミングで読み込みたいものを記述してる
+* dein_lazy.toml
+
+  dein.tomlより遅れたタイミングで読み込みたいものを記述してる
 
 ・etc
     初期設定で使うもの（個人のディレクトリに移して使うやつとか）が入ってる
