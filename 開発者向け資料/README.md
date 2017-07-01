@@ -4,4 +4,5 @@
 ************
 * neocomplcacheをEnable、Disenableにしたときにエラーが起こる問題  改行した
 
-* toile
+* 補完のせいで入力できなくなる不具合
+
