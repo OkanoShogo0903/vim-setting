@@ -155,8 +155,19 @@
         
 ""        nnoremap <S-Space> 
 ""        nnoremap <Space> 
-
+    
     inoremap <S-Tab> <Esc><<i
+
+" @マークに元からマッピングされていたものを無視しているため、用調整
+"    nnoremap <C-@> :<C-u>NeoComplCacheToggle<CR>
+
+    " For cursor moving in insert mode(Not recommended)
+    " neocomplcacheの設定についてはこのブログが参考になる
+    " http://yuu-glassdog.hatenablog.com/entry/2014/08/08/124748
+    inoremap <expr><Left> neocomplcache#close_popup() . "\<Left>"
+    inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+    inoremap <expr><Up> neocomplcache#close_popup() . "\<Up>"
+    inoremap <expr><Down> neocomplcache#close_popup() . "\<Down>"
 
     "入力モードで素早くjjしてエスケープ
     inoremap jj <Esc>
@@ -217,7 +228,6 @@ augroup END
 
 "cppならhを、hならcppを開くようにする
         let l:file_name = expand("%:r")
-
         if expand("%:e")=="h"
             let l:extension = expand("cpp")
         elseif expand("%:e")=="cpp"
@@ -257,34 +267,24 @@ augroup END
 "----------------------------------------------------------
     augroup Robocup-vimrc
         autocmd!
-        autocmd BufNewFile,BufRead *.cpp,*.h,*.vim execute 'read !stty -ixon -ixoff'
+        " <C-s> で保存できるようにするためのプログラム
+""        autocmd BufNewFile,BufRead execute 'read !stty -ixon -ixoff'
+
+"        autocmd BufNewFile,BufRead * execute 'read !stty -ixon -ixoff'
         inoremap <C-s> <Esc>:<C-u>write<CR>a
-        nnoremap <C-s> :<C-u>write<CR>
+        nnoremap <C-s> :write<CR>
         xnoremap <C-s> :<C-u>write<CR>
     augroup END
-
-"補完の  on off
-"silent 入れる
-"<C-u>もね
-"ワンラインライナーっぽく三項演算子使ってキー一つでやるか？
-"silentいれたらピンク色のエラーコードでなくなるけど、
-"それだとenableとdisenableの切替時に今どっちになったかがわからないから、そこは関数化されたechoで補完しよう
-    nnoremap @ :<C-u>NeoComplCacheDisable<CR>
-    nnoremap <C-@> :<C-u>NeoComplCacheEnable<CR>
-    command! OnOff call NeoOnOff()
-    function! NeoOnOff()
-        
-    endfunction
 
 "    xnoremap t 
 "    inoremap t 
     
-"    autocmd BufNewFile *.cpp 0r $HOME/.vim/comment.txt
+"    autocmd BufNewFile * 0r $HOME/.vim/comment.txt
 "----------------------------------------------------------
 "タブをスペース4つに変換
     augroup ConvertTabsToSpaces
         autocmd!
-            autocmd BufRead *.cpp,*.h execute 'retab'
-"           autocmd BufRead *.cpp,*.h execute '%!expand -t 4'
+            autocmd BufRead * execute 'retab'
+"           autocmd BufRead * execute '%!expand -t 4'
     augroup END
 "----------------------------------------------------------
