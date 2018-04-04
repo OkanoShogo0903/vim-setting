@@ -56,7 +56,7 @@
 "Character code
         set encoding=utf-8
         set fileencoding=utf-8
-        set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+        set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
 "==============================================
 "Back up
         set nobackup
@@ -98,6 +98,7 @@
     "Alt key カーソル位置を移動する前に戻す
 ""        nnoremap <M-Right> <C-i>
 ""        nnoremap <M-Left> <C-o>
+""        nnoremap <C-o> :OpenFile<CR>
 
     "'Browser page reading short cut' application
         nnoremap <C-Up> gg
@@ -148,7 +149,6 @@
 "        nnoremap <C-v> p
         inoremap <C-v> <Esc>pi
 
-        noremap <C-a> ggVG
 "数字指定してインデントする
         xnoremap <Tab> >
         xnoremap <S-Tab> <
@@ -185,6 +185,8 @@
         nnoremap <F7> :<C-u>source $MYVIMRC<CR>
 "                    \ :source $MYGVIMRC<CR>
 
+    " マークダウンでの折りたたみをしない
+    let g:vim_markdown_folding_disabled=1
 "-----------------------------------------------------------
 "カーソル位置の保存
 "move cursor the last edit part
@@ -245,6 +247,7 @@ augroup END
         endif
 
     endfunction
+
 "==============================================
 "自動で、対応する'h'もしくは'cpp'を開く
 "    autocmd BufNewFile *.cpp 0r $HOME/.vim/comment.txt
