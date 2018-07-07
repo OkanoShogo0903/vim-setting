@@ -1,7 +1,5 @@
 "---------------------------------------------------------
-" Robocup basic
-" 
-" ロボカップ標準のmapping等の設定を書いてある
+" mapping等の設定を書いてある
 " 
 "---------------------------------------------------------
 "colorscheme
@@ -67,7 +65,8 @@
         set helplang=ja
         ":version"で+clipboardになってないと機能しない。
         "その場合は端末のヴァージョンアップが必要になる
-        set clipboard=unnamed,autoselect
+        set clipboard=unnamed
+        ",autoselect
 "==============================================
 "KeyMapping
 
@@ -134,19 +133,10 @@
         nnoremap <C-f> /
         inoremap <C-f> <Esc>/
 
-"        nnoremap <S-Up> v
-"        nnoremap <S-Down> v
-"v覚えてもらう
-"        nnoremap <S-Left> v
-"        nnoremap <S-Right> v
 
-        "nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "        nmap <C-s> :w<CR>
 "        imap <C-s> <Esc>:w<CR>
 
-        xnoremap <C-x> d
-        xnoremap <C-c> y
-"        nnoremap <C-v> p
         inoremap <C-v> <Esc>pi
 
 "数字指定してインデントする
@@ -164,10 +154,10 @@
     " For cursor moving in insert mode(Not recommended)
     " neocomplcacheの設定についてはこのブログが参考になる
     " http://yuu-glassdog.hatenablog.com/entry/2014/08/08/124748
-    inoremap <expr><Left> neocomplcache#close_popup() . "\<Left>"
-    inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
-    inoremap <expr><Up> neocomplcache#close_popup() . "\<Up>"
-    inoremap <expr><Down> neocomplcache#close_popup() . "\<Down>"
+    "inoremap <expr><Left> neocomplcache#close_popup() . "\<Left>"
+    "inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+    "inoremap <expr><Up> neocomplcache#close_popup() . "\<Up>"
+    "inoremap <expr><Down> neocomplcache#close_popup() . "\<Down>"
 
     "入力モードで素早くjjしてエスケープ
     inoremap jj <Esc>
@@ -179,8 +169,8 @@
         nnoremap <F5> :<C-u>split ~/.vim/basic.vim<CR>
         nnoremap <S-F5> :<C-u>split ~/vim_settings/basic.vim<CR>
 
-        nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
-        nnoremap <S-F6> :<C-u>split ~/vim_settings/plug.vim<CR>
+        "nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
+        "nnoremap <S-F6> :<C-u>split ~/vim_settings/plug.vim<CR>
 
         nnoremap <F7> :<C-u>source $MYVIMRC<CR>
 "                    \ :source $MYGVIMRC<CR>
@@ -223,6 +213,7 @@ augroup END
  "   imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 "endif
 "----------------------------------------------------------
+"Writter : okano
 "コマンドで、対応する'h'もしくは'cpp'を開く
     command! OpenFile call OpenFileFunc()
     command! OF call OpenFileFunc()
@@ -285,6 +276,7 @@ augroup END
 "    autocmd BufNewFile * 0r $HOME/.vim/comment.txt
 "----------------------------------------------------------
 "タブをスペース4つに変換
+" インデントの色付けを綺麗に行うために必要
     augroup ConvertTabsToSpaces
         autocmd!
             autocmd BufRead * execute 'retab'

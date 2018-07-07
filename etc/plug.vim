@@ -29,38 +29,40 @@ let g:airline_theme = 'behelit'
 "let g:airline_theme = 'jellybeans'
 "let g:airline_theme = 'luna'
 "let g:airline_theme = 'tomorrow'
+let g:airline_theme = 'deus'
 
 "---------------------------------------------------
 "[Shougo/neocomplcache]
 " : 入力補完用プラグイン
+    if !has('nvim')
+        "インサートモードで移動中に候補選択しない
+    "    let g:NeoComplCache_TagsAutoUpdate = 1  
+    "    let g:NeoComplCache_EnableInfo = 1  
+    "    let g:NeoComplCache_EnableCamelCaseCompletion = 1  
+    "    let g:NeoComplCache_EnableSkipCompletion = 1  
+    "    let g:NeoComplCache_SkipInputTime = '0.5'  
+    "    inoremap  pumvisible() ? neocomplcache#close_popup()."\" : "\"  
+    "    inoremap  pumvisible() ? neocomplcache#close_popup()."\" : "\"  
 
-    "インサートモードで移動中に候補選択しない
-"    let g:NeoComplCache_TagsAutoUpdate = 1  
-"    let g:NeoComplCache_EnableInfo = 1  
-"    let g:NeoComplCache_EnableCamelCaseCompletion = 1  
-"    let g:NeoComplCache_EnableSkipCompletion = 1  
-"    let g:NeoComplCache_SkipInputTime = '0.5'  
-"    inoremap  pumvisible() ? neocomplcache#close_popup()."\" : "\"  
-"    inoremap  pumvisible() ? neocomplcache#close_popup()."\" : "\"  
+    "    let g:neocomplcache_enable_insert_char_pre = 1
+        
+        "基本設定
+        let g:acp_enableAtStartup = 0
+        let g:neocomplcache_enable_at_startup = 1
+        let g:neocomplcache_enable_smart_case = 1
+        let g:neocomplcache_min_syntax_length = 3
+        let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-"    let g:neocomplcache_enable_insert_char_pre = 1
-    
-    "基本設定
-    let g:acp_enableAtStartup = 0
-    let g:neocomplcache_enable_at_startup = 1
-    let g:neocomplcache_enable_smart_case = 1
-    let g:neocomplcache_min_syntax_length = 3
-    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-    " 一番目の候補を自動選択
-    let g:neocomplcache_enable_auto_select = 0
-    " 補完候補の数
-    let g:neocomplcache_max_list = 5
-    " 選択して改行されないようにする
-    inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-    "" <TAB>: completion.
-    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-    "" <C-h>, <BS>: close popup and delete backword char.
+        " 一番目の候補を自動選択
+        let g:neocomplcache_enable_auto_select = 0
+        " 補完候補の数
+        let g:neocomplcache_max_list = 5
+        " 選択して改行されないようにする
+        inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+        "" <TAB>: completion.
+        inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+        "" <C-h>, <BS>: close popup and delete backword char.
+    endif
 "---------------------------------------------------
 "[Shougo/neosnippet]
 "[Shougo/neosnippet-snippets]
@@ -128,22 +130,6 @@ let g:airline_theme = 'behelit'
     let g:indent_guides_guide_size = 1
 
 "---------------------------------------------------
-" タイムライン選択用の Unite を起動する
-nnoremap <silent> t :Unite tweetvim<CR>
-" 発言用バッファを表示する
-"nnoremap <silent> s           :<C-u>TweetVimSay<CR>
-" mentions を表示する
-"nnoremap <silent> <Space>re   :<C-u>TweetVimMentions<CR>
-" 特定のリストのタイムラインを表示する
-nnoremap <silent> <Space>tt   :<C-u>TweetVimListStatuses basyura vim<CR>
-
-" スクリーン名のキャッシュを利用して、neocomplcache で補完する
-if !exists('g:neocomplcache_dictionary_filetype_lists')
-  let g:neocomplcache_dictionary_filetype_lists = {}
-endif
-let neco_dic = g:neocomplcache_dictionary_filetype_lists
-let neco_dic.tweetvim_say = $HOME . '/.tweetvim/screen_name'
-"---------------------------------------------------
 "[]
 " : 
 " : 
@@ -161,19 +147,19 @@ let neco_dic.tweetvim_say = $HOME . '/.tweetvim/screen_name'
 "               vim用の補完プラグイン
 "               (sudo apt-get install lua5.2)でもluaが有効にならなかった
 
-"	call dein#add('Shougo/deoplete.nvim')
-"	" comment : neovim用の補完プラグイン
-"	            ソースファイルはpython3で書く
-"	            python3の難易度はかなり低く、サンプルを見れば書き換え可能とのこと
+"   call dein#add('Shougo/deoplete.nvim')
+"   " comment : neovim用の補完プラグイン
+"               ソースファイルはpython3で書く
+"               python3の難易度はかなり低く、サンプルを見れば書き換え可能とのこと
 
-"	call dein#add('Shougo/unite.vim') 
+"   call dein#add('Shougo/unite.vim') 
     " comment : need python3 install
     "           ファイルの操作をvimでやる
 
 " --- Please add new plugin ---
 
 " **********追加したいプラグインは下に追加していこう************
-"	call dein#add({path to dein.vim directory})
+"   call dein#add({path to dein.vim directory})
 
-"	call dein#add('')
+"   call dein#add('')
 

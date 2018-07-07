@@ -1,0 +1,91 @@
+Vim改造資料(for Linux)
+著　岡野
+作成日2017/5/31
+目次
+1 Github
+1.1 Gitインストール
+1.2 Git使って設定ファイルをダウンロード
+2 NeoVim
+2.1 NeoVimインストール
+3 Dein
+3.1 シンボリックリンクの作成
+3.2 Tomlファイルの作成
+3.3 関連ファイルの作成
+4 更新方法
+コマンド一発
+
+--------------------------------------------------------------------------------------------------------------
+用語解説
+
+Deinとは
+　Vimのプラグイン管理システム。
+　GitHub使って自動でプラグインを入れることができる。
+
+GitHubとは
+　分散型バージョン管理システム。
+偉大な先人達のプログラムが集積されている。
+詳しくはwebへ。
+　
+--------------------------------------------------------------------------------------------------------------
+
+↓に書いてあるコマンドをコピペしていくだけでOK
+インターネットに繋がっていることを前提にしているので、インストールを始める前にまずネットにつながるようにして下さい。
+また、ホームディレクトリ直下に.vimとdotfileがあることが前提となっているので、
+
+1 GitHub
+1.1 Gitインストール
+    新しい端末で、
+    git config --global http.proxy wwwproxy.kanazawa-it.ac.jp:8080
+
+    sudo apt-get install
+    sudo apt-get install git
+
+1.2 Git使って設定ファイルをダウンロード
+    git clone https://github.com/WinKIT/vim_settings.git
+    //名前とかの初期設定やらんといかんくね？
+
+2 NeoVim
+2.1 NeoVimインストール
+    NeoVimはUbunto 12.04以降で使えます
+    ホームディレクトリで行いましょう
+
+    sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config
+    git clone https://github.com/neovim/neovim.git
+    (結構時間がかかります。clone into neovim...で止まる場合は先輩に相談して。)
+    cd neovim
+    make
+    (makeも2,3分程度かかるのでトイレでも行ってきて下さい)
+    sudo make install
+
+3 Dein
+3.1 シンボリックリンクの作成
+    ここではリンクを貼っていきます。Pathの関係でそのまま打っていって下さい。
+
+    mkdir ~/.vim
+    mv ~/.vimrc ~/.vimrc_origin
+    ln -sf ~/vim_settings/.vimrc ~/.vimrc
+    ln -sf ~/vim_settings/.vimrc ~/.nvimrc
+    ln -sf ~/vim_settings/colors ~/.vim/colors  
+3.2 関連ファイルの作成
+    cp ~/vim_settings/etc/basic.vim ~/.vim/basic.vim
+    cp ~/vim_settings/etc/plug.vim ~/.vim/plug.vim
+    cp ~/vim_settings/etc/my_dein.toml ~/.vim/my_dein.toml
+
+3.3 Deinインストール
+インターネットに繋がった状態で端末にviと打ち込んで下さい。
+自動的にインストールが始まります。(所要時間は2,3分程度)
+インストール中に[継続]という表示が出てくるので、出てくるたびにEnterを押して下さい。
+これで終了です、お疲れ様でした。
+4 更新方法
+
+ネットに繋がった状態で端末に以下のコマンドを入れて下さい。
+sh ~/vim_settings/version_up.sh 
+
+追記
+・Pathの問題でファイルの場所を変えるとエラーが起こるので、その場合は先輩に相談してください
+・操作方法についてですが、~/dotfileに操作方法を記したチートシートと動画がおいてあるのでそれも見て下さい。
+
+Q&A
+無線でgitするためのプロキシ設定
+git config --global http.proxy wwwproxy.kanazawa-it.ac.jp:8080
+
