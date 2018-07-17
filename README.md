@@ -1,4 +1,4 @@
-# vim_settings
+## vim_settings
   vimは最高のテキストエディタですが、CUIのとっつきにくさのために敬遠されがちです。
 
 そのため、できるだけ分かりやすく使いやすいをテーマにしました。
@@ -7,12 +7,7 @@
 
 最低限のvimの操作方法は覚えてもらうしかありませんので、チートシートを見ながら覚えてください。
 
-## VimInstall
-  "vim改造資料"を参照してください
-
-## Neovim
-
-# ファイル、ディレクトリの説明
+## ファイル、ディレクトリの説明
 * basic.vim
 
   基本設定
@@ -49,12 +44,71 @@
   
   ファイルタイプを指定するためのファイルが入ってる
 
-# この設定ファイルを使う意味と経緯
-当初、2016,1017年度のロボカップメンバーの半数は、linux標準のメモ帳やCodeBlocksを使っていました。
+## NeoVimInstall 
+インターネットに繋がっていることを前提にしているので、インストールを始める前にまずネットにつながるようにして下さい。
 
-vimを使うことで開発速度を格段に上げることができ、コーディングを楽しいものとして感じることができるのです。
+1. Gitインストール
+    新しい端末で、
 
-これらのメリットがあるのにvimが使われていない理由は、vim独特の操作方法(aやiでインサートモードにならないと入力できないなど)が分かりづらかったことが一番の要因であると考えました。
+    ```
+    git config --global http.proxy wwwproxy.kanazawa-it.ac.jp:8080
 
-そのためこの設定ファイルは、vimならばこんなこともできるという便利さや魅力を伝え、vimを初めての人にとって使いやすいものにすること、またこの設定ファイルが親しまれて継承されていくことを目的として作成しています。
-(岡野)
+    sudo apt-get install
+    sudo apt-get install git
+    ```
+
+1. Git使って設定ファイルをダウンロード
+
+    ```
+    git clone https://github.com/WinKIT/vim_settings.git
+    ```
+
+2. NeoVimインストール
+    NeoVimはUbunto 12.04以降で使えます
+    ホームディレクトリで行いましょう
+
+    ```
+    sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config
+    git clone https://github.com/neovim/neovim.git
+    (結構時間がかかります。clone into neovim...で止まる場合は先輩に相談して。)
+    cd neovim
+    make
+    (makeも2,3分程度かかるのでトイレでも行ってきて下さい)
+    sudo make install
+    ```
+
+3. Dein
+    1. シンボリックリンクの作成
+    ここではリンクを貼っていきます。Pathの関係でそのまま打っていって下さい。
+
+    ```
+    mkdir ~/.vim
+    mv ~/.vimrc ~/.vimrc_origin
+    ln -sf ~/vim_settings/.vimrc ~/.vimrc
+    ln -sf ~/vim_settings/.vimrc ~/.nvimrc
+    ln -sf ~/vim_settings/colors ~/.vim/colors  
+    ```
+    2. 関連ファイルの作成
+
+    ```
+    cp ~/vim_settings/etc/basic.vim ~/.vim/basic.vim
+    cp ~/vim_settings/etc/plug.vim ~/.vim/plug.vim
+    cp ~/vim_settings/etc/my_dein.toml ~/.vim/my_dein.toml
+    ```
+
+3.3. Deinインストール
+    インターネットに繋がった状態で端末にviと打ち込んで下さい。
+    自動的にインストールが始まります。(所要時間は2,3分程度)
+    インストール中に[継続]という表示が出てくるので、出てくるたびにEnterを押して下さい。
+    これで終了です、お疲れ様でした。
+
+
+- 追記
+操作方法についてですが、~/dotfileに操作方法を記したチートシートと動画がおいてあるのでそれも見て下さい。
+
+## Q&A
+無線でgithubを利用するためのプロキシ設定
+
+```
+git config --global http.proxy wwwproxy.kanazawa-it.ac.jp:8080
+```
