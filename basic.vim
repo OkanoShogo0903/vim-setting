@@ -244,15 +244,16 @@ augroup END
 "    autocmd BufNewFile *.cpp 0r $HOME/.vim/comment.txt
     
     let g:open_file_auto_enable = 0
+
     augroup Robocup-vimrc
         autocmd!
-
+    
         if g:open_file_auto_enable
             autocmd BufNewFile,BufRead *.cpp,*.h call OpenFileAutoFunc()
         endif
 ""        autocmd func_name * w
     augroup END
-
+    
     function! OpenFileAutoFunc()
         if OpenFileFunc()
 "            normal <C-w>w
@@ -265,7 +266,7 @@ augroup END
 ""        autocmd BufNewFile,BufRead execute 'read !stty -ixon -ixoff'
 
 "        autocmd BufNewFile,BufRead * execute 'read !stty -ixon -ixoff'
-        inoremap <C-s> <Esc>:<C-u>write<CR>a
+        inoremap <C-s> <C-u><C-\><C-n>:write<CR>a
         nnoremap <C-s> :write<CR>
         xnoremap <C-s> :<C-u>write<CR>
     augroup END
