@@ -1,0 +1,382 @@
+#---------------------------------------------------------
+# Robocup plugin
+# 
+# ロボカップ標準となるプラグインの設定を書いてある
+# 
+#---------------------------------------------------------
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+
+[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+# ブランチやタグを指定したいとき
+[[plugins]]
+repo = 'delphinus35/typescript-vim'
+rev  = 'colorize-template-strings'
+
+# 特定の条件で読み込みたいとき
+[[plugins]]
+repo = 'elzr/vim-json'
+if   = '''! has('kaoriya')'''
+
+# 依存関係を指定したいとき
+[[plugins]]
+repo    = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+hook_add = '''
+"let g:airline_theme = 'molokai'
+"let g:airline_theme = 'luna'
+"let g:airline_theme = 'bubblegum'
+"let g:airline_theme = 'sol'
+"let g:airline_theme = 'papercolor'
+"let g:airline_theme = 'base16'
+"let g:airline_theme = 'behelit'
+"let g:airline_theme = 'jellybeans'
+"let g:airline_theme = 'luna'
+"let g:airline_theme = 'tomorrow'
+let g:airline_theme = 'deus'
+
+let g:lightline = {
+        \ 'colorscheme': 'wombat',
+        \ 'mode_map': {'c': 'NORMAL'},
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \ },
+        \ 'component_function': {
+        \   'modified': 'LightlineModified',
+        \   'readonly': 'LightlineReadonly',
+        \   'fugitive': 'LightlineFugitive',
+        \   'filename': 'LightlineFilename',
+        \   'fileformat': 'LightlineFileformat',
+        \   'filetype': 'LightlineFiletype',
+        \   'fileencoding': 'LightlineFileencoding',
+        \   'mode': 'LightlineMode'
+        \ }
+        \ }
+
+function! LightlineModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+    return fugitive#head()
+  else
+    return ''
+  endif
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+" https://itchyny.hatenablog.com/entry/20130820/1376978742
+  let g:airline_enable_branch = 0
+  let g:airline_section_b = "%t %M"
+  let g:airline_section_c = ''
+  let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
+  let g:airline_section_x =
+        \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
+        \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
+        \ "%{strlen(&filetype)?&filetype:'no ft'}"
+  let g:airline_section_y = '%3p%%'
+  let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
+  let g:airline#extensions#whitespace#enabled = 0
+
+" ブランチ名を表示
+let g:airline#extensions#branch#enabled = 1
+
+" パワーラインでかっこよく
+"let g:airline_powerline_fonts = 1
+" タブバーをかっこよく
+let g:airline#extensions#tabline#enabled = 1
+
+" gitのHEADから変更した行の+-を非表示(vim-gitgutterの拡張)
+let g:airline#extensions#hunks#enabled = 0
+
+'''
+
+# 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+" /や?での検索ヒット時に、現在の検索位置を表示する
+    " mapping
+    " when you want to display it in screen,change this
+        if 1    " if 1
+            nmap n <Plug>(anzu-n-with-echo)
+            nmap N <Plug>(anzu-N-with-echo)
+        else    " if 0
+            nmap n <Plug>(anzu-mode-n)
+            nmap N <Plug>(anzu-mode-N)
+        endif
+        nmap * <Plug>(anzu-star-with-echo)
+        nmap # <Plug>(anzu-sharp-with-echo) 
+    " clear status
+        nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+    " statusline
+        set statusline=%{anzu#search_status()}
+    " comment :
+    "           if you search 'word', word(12/51) in command line
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+depends = ['Shougo/neosnippet-snippets']
+on_i = 1
+on_ft = ['snippet']
+hook_add = '''
+" : ~/vim_settings/dictで辞書登録してる
+" : http://kazuph.hateblo.jp/entry/2013/01/19/193745
+    " <TAB>: completion.
+    " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+    
+    " Plugin key-mappings
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    
+    " SuperTab like snippets behavior.
+    " imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+    imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+        
+    " For snippet_complete marker.
+    if has('conceal')
+        set conceallevel=2 concealcursor=i
+    endif
+
+    "let g:neocomplcache_dictionary_filetype_lists = {
+    "    \ 'default' : '',
+    "    \ 'robocup' : $HOME.'/vim_settings/dict/robocup.dict',
+    "    \ }
+    let g:neosnippet#snippets_directory = '~/vim_settings/snipmate/'
+'''
+
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+hook_add = '''
+    nmap / <Plug>(incsearch-forward)
+    map ? <plug>(incsearch-background)
+    map g/ <plug>(incsearch-stay)
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+    "https://kamiya555.github.io/2015/10/14/nerdtree-command/
+    " ブックマークを初期表示
+    let g:NERDTreeShowBookmarks=1
+
+    " 隠しファイルをデフォルトで表示させる
+    let NERDTreeShowHidden = 1
+
+    " デフォルトでツリーを表示させる
+    "autocmd VimEnter * execute 'NERDTree'
+
+    " ファイル名指定しなかった場合はデフォルトでNERDTREE表示
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+'''
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+
+[[plugins]]
+repo = 'osyo-manga/vim-over'
+# 置換時に、対象文字列をハイライトする
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+    "vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+    let g:indent_guides_enable_on_vim_startup = 1
+    "自動カラー無効
+    let g:indent_guides_auto_colors = 0
+    "偶数行と奇数行の色を設定
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black "3
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray "4
+    "何行目から色付けを行うかを指定する
+    let g:indent_guides_start_level = 2
+    "可視化領域のサイズを指定
+    let g:indent_guides_guide_size = 1
+'''
+[[plugins]]
+repo = 'ConradIrwin/vim-bracketed-paste'
+# ネットのプログラムをコピペするときにインデントされるのを防ぐ
+
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+hook_add = '''
+" jとkでの移動を素早くする
+    nmap j <Plug>(accelerated_jk_gj)
+    nmap k <Plug>(accelerated_jk_gk)
+'''
+
+[[plugins]]
+repo = 'vim-scripts/autodate.vim'
+hook_add = '''
+" : タイムスタンプの自動更新
+" : Last Change : . みたいにしてやるよ
+    let autodate_keyword_pre="Date      : "
+    let autodate_keyword_post="."
+"    let autodate_lines=100
+"    let autodate_start_line=-1
+    let autodate_format="%Y/%m/%d"
+'''
+
+[[plugins]] # Toml
+repo  = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'tyru/eskk.vim'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
+
+"let g:gitgutter_sign_added = 'xx'
+"let g:gitgutter_sign_modified = 'yy'
+"let g:gitgutter_sign_removed = 'zz'
+"let g:gitgutter_sign_removed_first_line = '^^'
+"let g:gitgutter_sign_modified_removed = 'ww'
+
+" https://github.com/airblade/vim-gitgutter 
+'''
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+"nmap <C-r> <Plug>(quickrun)
+"nmap <Leader>r <Plug>(quickrun)
+'''
+
+[[plugins]]
+repo = 'Lokaltog/vim-easymotion'
+hook_add = '''
+" =======================================
+" Boost your productivity with EasyMotion
+" =======================================
+" Disable default mappings
+" If you are true vimmer, you should explicitly map keys by yourself.
+" Do not rely on default bidings.
+let g:EasyMotion_do_mapping = 0
+
+" Or map prefix key at least(Default: <Leader><Leader>)
+" map <Leader> <Plug>(easymotion-prefix)
+
+" =======================================
+" Find Motions
+" =======================================
+" Jump to anywhere you want by just `4` or `3` key strokes without thinking!
+" `s{char}{char}{target}`
+nmap <Space> <Plug>(easymotion-s2)
+xmap <Space> <Plug>(easymotion-s2)
+omap <Space> <Plug>(easymotion-s2)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+
+" =======================================
+" Line Motions
+" =======================================
+" `JK` Motions: Extend line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" keep cursor column with `JK` motions
+let g:EasyMotion_startofline = 0
+
+" =======================================
+" General Configuration
+" =======================================
+let g:EasyMotion_keys = ';HKLYUIOPNM,QWERTASDGZXCVBJF'
+" Show target key with upper case to improve readability
+let g:EasyMotion_use_upper = 1
+" Jump to first match with enter & space
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+
+
+" =======================================
+" Search Motions
+" =======================================
+" Extend search motions with vital-over command line interface
+" Incremental highlight of all the matches
+" Now, you don't need to repetitively press `n` or `N` with EasyMotion feature
+" `<Tab>` & `<S-Tab>` to scroll up/down a page with next match
+" :h easymotion-command-line
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
+'''
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'kannokanno/previm'
+hook_add = '''
+nmap <silent> <F8> :PrevimOpen<CR>
+imap <silent> <F8> <Esc>:PrevimOpen<CR>
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+# http://te2u.hatenablog.jp/entry/2012/07/31/093120
+# exp: sd" cs"' , S"

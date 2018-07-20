@@ -1,0 +1,81 @@
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+depends = ['neomru.vim']
+on_event = 'BufRead'
+hook_add = '''
+nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
+nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
+nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
+nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
+nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
+nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+'''
+hook_post_source = '''
+call denite#custom#var('file_rec', 'command',
+\ ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+call denite#custom#var('grep', 'command',
+\ ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+call denite#custom#var('grep', 'default_opts', [])
+call denite#custom#var('grep', 'recursive_opts', [])
+'''
+
+[[plugins]]
+# エラーで入らなかったときは、`$ pip3 install --upgrade neovim`
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+#on_event = 'InsertCharPre'
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 0
+  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#enable_camel_case = 0
+  let g:deoplete#enable_ignore_case = 0
+  let g:deoplete#enable_refresh_always = 0
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#file#enable_buffer_path = 1
+  let g:deoplete#max_list = 10000
+  "inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+  "      \ neosnippet#expandable_or_jumpable() ?
+  "      \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+
+  "補完候補選択時は<TAB>で候補移動snipppet時は<TAB>で次の入力先へ
+  imap <expr><TAB> pumvisible() ? "\<C-N>" : neosnippet#jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  smap <expr><TAB> neosnippet#jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+'''
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_i = 1
+on_ft = 'python'
+#hook_add = '''
+#"    let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3.6'
+#"    let g:deoplete#sources#jedi#python_path = '/home/okano/anaconda3/bin/python3'
+#'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_source = '''
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+on_i  = 1
+on_ft = ['snippet']
+depends = ['neosnippet-snippets']
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_path = '.*'
+on_event = 'BufEnter' 

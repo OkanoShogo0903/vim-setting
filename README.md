@@ -45,10 +45,10 @@
   ファイルタイプを指定するためのファイルが入ってる
 
 ## NeoVimInstall 
-インターネットに繋がっていることを前提にしているので、インストールを始める前にまずネットにつながるようにして下さい。
+NeoVimはUbunto 12.04以降で使えます.
+インターネットに繋がっていることを前提にしているので、インストールを始める前にまずネットにつながるようにして下さい.
 
 1. Gitインストール
-    新しい端末で、
 
     ```
     git config --global http.proxy wwwproxy.kanazawa-it.ac.jp:8080
@@ -57,55 +57,43 @@
     sudo apt-get install git
     ```
 
-1. Git使って設定ファイルをダウンロード
-
-    ```
-    git clone https://github.com/WinKIT/vim_settings.git
-    ```
-
 2. NeoVimインストール
-    NeoVimはUbunto 12.04以降で使えます
-    ホームディレクトリで行いましょう
+    ホームディレクトリで、以下のコードを実行
 
     ```
     sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++ pkg-config
     git clone https://github.com/neovim/neovim.git
-    (結構時間がかかります。clone into neovim...で止まる場合は先輩に相談して。)
+    (結構長い)
     cd neovim
     make
-    (makeも2,3分程度かかるのでトイレでも行ってきて下さい)
+    (makeも2,3分程度かかる)
     sudo make install
     ```
 
-3. Dein
-    1. シンボリックリンクの作成
-    ここではリンクを貼っていきます。Pathの関係でそのまま打っていって下さい。
+3. わたくしの設定ファイルをダウンロード
 
     ```
-    mkdir ~/.vim
-    mv ~/.vimrc ~/.vimrc_origin
-    ln -sf ~/vim_settings/.vimrc ~/.vimrc
-    ln -sf ~/vim_settings/.vimrc ~/.nvimrc
-    ln -sf ~/vim_settings/colors ~/.vim/colors  
-    ```
-    2. 関連ファイルの作成
-
-    ```
-    cp ~/vim_settings/etc/basic.vim ~/.vim/basic.vim
-    cp ~/vim_settings/etc/plug.vim ~/.vim/plug.vim
-    cp ~/vim_settings/etc/my_dein.toml ~/.vim/my_dein.toml
+    git clone https://github.com/OkanoShogo0903/vim_settings.git
     ```
 
-3.3. Deinインストール
-    インターネットに繋がった状態で端末にviと打ち込んで下さい。
-    自動的にインストールが始まります。(所要時間は2,3分程度)
-    インストール中に[継続]という表示が出てくるので、出てくるたびにEnterを押して下さい。
-    これで終了です、お疲れ様でした。
+4. わたくしの設定ファイルをインストール
+    neovimの設定
+    シンボリックリンクの作成、パスの設定とかをします.
+
+    ```
+    mkdir ~/.config/nvim
+    cp ~/vim_settings/etc/vimrc_sample ~/.vimrc
+    ln -s ~/.vimrc ~/.config/nvim/init.vim
+    ```
+
+5. プラグインのインストール
+    インターネットに繋がった状態で、端末に`nvim`と打ち込む.
+    自動的にインストールが始まります.
+    インストール中に[継続]という表示が出てきたらEnterを押して下さい.
 
 
-- 追記
-操作方法についてですが、~/dotfileに操作方法を記したチートシートと動画がおいてあるのでそれも見て下さい。
-
+## neovimの本来の設定ファイルの場所
+`$HOME/.config/nvim/init.vim` <--- これがデフォルトで読み込まれる
 ## Q&A
 無線でgithubを利用するためのプロキシ設定
 

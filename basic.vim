@@ -2,16 +2,19 @@
 " mapping等の設定を書いてある
 " 
 "---------------------------------------------------------
-"colorscheme
-    syntax enable
-"    source color.vimrc
-        set hlsearch
-      
-        set t_Co=256
-"==============================================
 "syntax color   
         syntax on
 
+"==============================================
+"auto correct
+        "limit of auto correct
+        set pumheight=8
+
+        "paint auto correct
+        "for vim7
+        hi Pmenu        ctermfg=Black ctermbg=Grey
+        hi PmenuSel     ctermbg=Blue
+        hi PmenuSbar    ctermbg=Cyan
 "==============================================
 "tab   
         set smarttab
@@ -284,3 +287,28 @@ augroup END
 "           autocmd BufRead * execute '%!expand -t 4'
     augroup END
 "----------------------------------------------------------
+"colorscheme
+    syntax enable
+"    source color.vimrc
+        set hlsearch
+      
+        set t_Co=256
+        "colorscheme default
+        set background=dark
+
+"        colorscheme molokai
+"        colorscheme monokai
+"        colorscheme badwolf
+"        colorscheme goodwolf
+"        colorscheme kitchen
+"        colorscheme shine
+"        colorscheme tender
+"        colorscheme pencil
+"        colorscheme kalisi
+"        colorscheme moonshine_minimal
+"        colorscheme moonshine_lowcontrast
+"        colorscheme hybrid
+        colorscheme deus
+
+" 背景を透けさせる
+"    highlight Normal ctermbg=none
