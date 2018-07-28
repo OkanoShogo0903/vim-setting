@@ -89,3 +89,4 @@ NeoVimはUbunto 12.04以降で使えます.
 ```
 git config --global http.proxy wwwproxy.kanazawa-it.ac.jp:8080
 ```
+
