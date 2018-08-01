@@ -172,7 +172,7 @@ depends = ['Shougo/neosnippet-snippets']
 on_i = 1
 on_ft = ['snippet']
 hook_add = '''
-" : ~/vim_settings/dictで辞書登録してる
+" : ~/vim-setting/dictで辞書登録してる
 " : http://kazuph.hateblo.jp/entry/2013/01/19/193745
     " <TAB>: completion.
     " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -194,9 +194,9 @@ hook_add = '''
 
     "let g:neocomplcache_dictionary_filetype_lists = {
     "    \ 'default' : '',
-    "    \ 'robocup' : $HOME.'/vim_settings/dict/robocup.dict',
+    "    \ 'robocup' : $HOME.'/vim-setting/dict/robocup.dict',
     "    \ }
-    let g:neosnippet#snippets_directory = '~/vim_settings/snipmate/'
+    let g:neosnippet#snippets_directory = '~/vim-setting/snipmate/'
 '''
 
 [[plugins]]

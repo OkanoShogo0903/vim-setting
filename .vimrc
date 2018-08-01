@@ -1,2 +1,2 @@
-set runtimepath+=$HOME/vim_settings
-source ~/vim_settings/init.vim
+set runtimepath+=$HOME/vim-setting
+source ~/vim-setting/init.vim

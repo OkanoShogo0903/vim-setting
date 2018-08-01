@@ -37,7 +37,7 @@ if has('nvim')
     let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
     let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
 
-    "set runtimepath+=~/vim_settings/
+    "set runtimepath+=~/vim-setting/
     "runtime! etc/*.vim 
 
     tnoremap <silent> jj <C-\><C-n>
@@ -49,8 +49,9 @@ endif
 
 "if filereadable(fnamemodify(expand('<sfile>'), ':h').'/basic.vim')
 "   source fnamemodify(expand('<sfile>'), ':h').'/basic.vim'
-if filereadable(expand('~/vim_settings/basic.vim'))
-    source ~/vim_settings/basic.vim
+if filereadable(expand('~/vim-setting/basic.vim'))
+    source ~/vim-setting/basic.vim
+
 else
     echo "ERR basic.vim"
 endif

@@ -1,9 +1,13 @@
-## vim_settings
+## vim-setting
 わたくしの設定ファイルをそのまま載せてあります.
 自由にpullして自分仕様の設定に書き換えればいいんじゃないでしょうか.
 
 余談ですが、ここ最近は夢の中にもvimが出始めてきました.
 もう病気だと思います.
+
+Neovimのインストールについてですが、  
+以外に前提知識(pyenv, .bash系)がないとつまずくかもしれません.  
+ちなみに自分は3回目のインストールで1時間ほどかかりました.        
 
 ## NeoVimInstall 
 NeoVimはUbunto 12.04以降で使えます.
@@ -19,6 +23,9 @@ NeoVimはUbunto 12.04以降で使えます.
     ```
 
 2. NeoVimインストール
+    方法はいつくかありますが、そのうち２つをここに示します。
+    1. ソースからmakeする方法(ubuntu14.04で実績あり)
+
     ホームディレクトリで、以下のコードを実行
 
     ```
@@ -30,11 +37,13 @@ NeoVimはUbunto 12.04以降で使えます.
     (makeも2,3分程度かかる)
     sudo make install
     ```
+    2. ppaからapt-getでいれる方法(ubuntu16.04で実績あり)
+    [ここ](https://github.com/neovim/neovim/wiki/Installing-Neovim)のinstall-ubuntuのとこ読んで.
 
 3. わたくしの設定ファイルをダウンロード
 
     ```
-    git clone https://github.com/OkanoShogo0903/vim_settings.git
+    git clone https://github.com/OkanoShogo0903/vim-setting.git
     ```
 
 4. わたくしの設定ファイルをインストール
@@ -43,14 +52,37 @@ NeoVimはUbunto 12.04以降で使えます.
 
     ```
     mkdir ~/.config/nvim
-    cp ~/vim_settings/etc/vimrc_sample ~/.vimrc
+    cp ~/vim_setting/etc/vimrc_sample ~/.vimrc
     ln -s ~/.vimrc ~/.config/nvim/init.vim
     ```
 
-5. プラグインのインストール
-    インターネットに繋がった状態で、端末に`nvim`と打ち込む.
-    自動的にインストールが始まります.
-    インストール中に[継続]という表示が出てきたらEnterを押して下さい.
+
+## neovim初期設定編
+nvimで`:CheckHealth`すると、エラー出るはず.
+python2,3のパスの問題なので、これをクリアします.
+ちなみにこの記事は[このサイト](https://qiita.com/yuku_t/items/6db331e7084f88b43fe4)を参考にして書いてる.
+[このサイト](https://qiita.com/shigechioyo/items/198211e84f8e0e9a5c18)を参考にしてpyenvいれる.
+ここでpyenvによってpythonの2系と3系を用意する.
+ここから先は`python2.7.15`と`python3.6.6`を入れているが、別のヴァージョンでもよいので別のを入れるときは脳内置換してどうぞ.
+```
+pyenv install 2.7.15
+pyenv install 3.6.6
+```
+確認は、`pyenv versions`でできる.
+
+```
+$ pyenv virtualenv 2.7.15 neovim-2
+$ pyenv shell neovim-2 
+$ pip install neovim
+$ pyenv virtualenv 3.6.6 neovim-3
+$ pyenv shell neovim-3
+$ pip install neovim
+```
+nvimで`:CheckHealth`してみて、エラーでるか確認して.
+
+## hoge
+shougoプラグインには、設定を読みこませるためのコマンドとして`:UpdateRemotePlugins`が用意されてます.
+とりあえずこれを打ち込んで、<C-u><C-u>とかしてdeniteが動くかどうか確かめてみて.
 
 
 ## neovimの本来の設定ファイルの場所
