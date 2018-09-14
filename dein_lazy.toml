@@ -32,7 +32,7 @@ call denite#custom#var('grep', 'recursive_opts', [])
 # エラーで入らなかったときは、`$ pip3 install --upgrade neovim`
 repo = 'Shougo/deoplete.nvim'
 on_i = 1
-#on_event = 'InsertCharPre'
+on_event = 'InsertCharPre'
 hook_source = '''
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_delay = 0

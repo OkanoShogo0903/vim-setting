@@ -129,18 +129,18 @@
 "       nnoremap \<C-i> <C-i>
 
     "'Edit short cut' application
-        nnoremap <C-z> u
+        "nnoremap <C-z> u
 "        inoremap <C-z> <Esc>ui
-        nnoremap <C-y> <C-r>
+        "nnoremap <C-y> <C-r>
 "        inoremap <C-y> <Esc><C-r>
-        nnoremap <C-f> /
-        inoremap <C-f> <Esc>/
+        "nnoremap <C-f> /
+        "inoremap <C-f> <Esc>/
 
 
 "        nmap <C-s> :w<CR>
 "        imap <C-s> <Esc>:w<CR>
 
-        inoremap <C-v> <Esc>pi
+        "inoremap <C-v> <Esc>pi
 
 "数字指定してインデントする
         xnoremap <Tab> >
@@ -170,14 +170,42 @@
         nnoremap <F2> :<C-u>!eog ~/vim-setting/doc/cheatsheet_1366x768.png<CR>
 
         nnoremap <F5> :<C-u>split ~/vim-setting/basic.vim<CR>
-        nnoremap <S-F5> :<C-u>split ~/vim-setting/dein.toml<CR>
+        nnoremap <F6> :<C-u>split ~/vim-setting/dein.toml<CR>
+        nnoremap <F7> :<C-u>split ~/vim-setting/dein_lazy.toml<CR>
 
         "nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
         "nnoremap <S-F6> :<C-u>split ~/vim-setting/plug.vim<CR>
 
-        nnoremap <F7> :<C-u>source $MYVIMRC<CR>
+        nnoremap <F8> :<C-u>source $MYVIMRC<CR>
 "                    \ :source $MYGVIMRC<CR>
 
+    " Natural.
+    nnoremap Y y$
+
+    " Do not set to register.
+    nnoremap x "_x
+    vnoremap x "_x
+    nnoremap X "_X
+    vnoremap X "_X
+
+    nnoremap s "_s
+    vnoremap s "_s
+    nnoremap S "_S
+    vnoremap S "_S
+
+    " For tartminal mode.
+    cnoremap <C-p> <Up>
+    cnoremap <C-n> <Down>
+    cnoremap <C-b> <Left>
+    cnoremap <C-f> <Right>
+    cnoremap <C-a> <Home>
+    cnoremap <C-e> <End>
+    cnoremap <C-d> <Del>
+
+    " #で検索後に置換入力状態にする.
+    nmap # :%s/<C-r>///g<Left><Left>
+    nmap ## :%s/<C-r>///gc<Left><Left><Left>
+    
     " マークダウンでの折りたたみをしない
     let g:vim_markdown_folding_disabled=1
 "-----------------------------------------------------------

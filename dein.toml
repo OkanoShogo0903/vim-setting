@@ -136,6 +136,9 @@ let g:airline#extensions#hunks#enabled = 0
 
 '''
 
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
 # 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
@@ -279,6 +282,7 @@ repo = 'tyru/eskk.vim'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+on_ft = 'toml'
 hook_add = '''
 if exists('&signcolumn')  " Vim 7.4.2201
   set signcolumn=yes
@@ -301,7 +305,7 @@ repo = 'airblade/vim-gitgutter'
 repo = 'thinca/vim-quickrun'
 hook_add = '''
 "nmap <C-r> <Plug>(quickrun)
-"nmap <Leader>r <Plug>(quickrun)
+nmap <Leader>r <Plug>(quickrun)
 '''
 
 [[plugins]]
@@ -381,6 +385,7 @@ repo = 'tpope/vim-surround'
 # http://te2u.hatenablog.jp/entry/2012/07/31/093120
 # exp: sd" cs"' , S"
 
+[[plugins]]
 repo = "vim-latex/vim-latex"
 hook_add = '''
 filetype plugin on
@@ -412,4 +417,10 @@ let g:Tex_ViewRule_pdf = 'xdg-open'
 "let g:Tex_ViewRule_pdf = 'chromium --new-window'
 
 let g:Tex_AutoFolding = 0
+'''
+
+[[plugins]]
+repo = "taketwo/vim-ros"
+hook_add = '''
+"g:ros_build_system = 'catkin'
 '''
