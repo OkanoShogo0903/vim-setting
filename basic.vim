@@ -61,7 +61,7 @@
 "==============================================
 "Back up
         set nobackup
-"       noswapfile
+        set noswapfile
 "==============================================
 "Other ???
         set showmode
@@ -75,8 +75,8 @@
 
     "誤動作予防
         nnoremap Q <Nop>
-        nnoremap ZZ <Nop>
-        nnoremap ZQ <Nop>
+        "nnoremap ZZ <Nop>
+        "nnoremap ZQ <Nop>
     
     "basic
         nmap <Esc><Esc> :nohlsearch<CR><Esc>
@@ -204,8 +204,11 @@
 
     " #で検索後に置換入力状態にする.
     nmap # :%s/<C-r>///g<Left><Left>
-    nmap ## :%s/<C-r>///gc<Left><Left><Left>
-    
+    "nmap ## :%s/<C-r>///gc<Left><Left><Left>
+
+    " bufferの進み戻り
+    nnoremap <C-H> :bp<enter>
+    nnoremap <C-L> :bn<enter> 
     " マークダウンでの折りたたみをしない
     let g:vim_markdown_folding_disabled=1
 "-----------------------------------------------------------
@@ -271,6 +274,19 @@ augroup END
     endfunction
 
 "==============================================
+"実行環境の情報を記入するゾ
+    command! EnvInfo call EnvInfo()
+    function! EnvInfo()
+        " carnel version.
+        execute ':r! uname -r'
+        " python version.
+        execute ':r! python -V'
+        " Os version.
+        execute ':r! cat /etc/lsb-release'
+        " ros version.
+        execute ':r! rosversion -d'
+    endfunction
+"==============================================
 "自動で、対応する'h'もしくは'cpp'を開く
 "    autocmd BufNewFile *.cpp 0r $HOME/.vim/comment.txt
     
@@ -321,8 +337,10 @@ augroup END
         set hlsearch
       
         set t_Co=256
-        "colorscheme default
+
+        colorscheme default
         set background=dark
+        "set background=light
 
 "        colorscheme molokai
 "        colorscheme monokai
@@ -336,7 +354,10 @@ augroup END
 "        colorscheme moonshine_minimal
 "        colorscheme moonshine_lowcontrast
 "        colorscheme hybrid
-        colorscheme deus
+"        colorscheme deus
+"        colorscheme iceberg
+"        colorscheme spacegray
+        colorscheme gruvbox
 
 " 背景を透けさせる
 "    highlight Normal ctermbg=none

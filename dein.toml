@@ -49,7 +49,8 @@ hook_add = '''
 "let g:airline_theme = 'jellybeans'
 "let g:airline_theme = 'luna'
 "let g:airline_theme = 'tomorrow'
-let g:airline_theme = 'deus'
+"let g:airline_theme = 'deus'
+let g:airline_theme = 'gruvbox'
 
 let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -110,19 +111,6 @@ function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-" https://itchyny.hatenablog.com/entry/20130820/1376978742
-  let g:airline_enable_branch = 0
-  let g:airline_section_b = "%t %M"
-  let g:airline_section_c = ''
-  let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
-  let g:airline_section_x =
-        \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
-        \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
-        \ "%{strlen(&filetype)?&filetype:'no ft'}"
-  let g:airline_section_y = '%3p%%'
-  let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
-  let g:airline#extensions#whitespace#enabled = 0
-
 " ブランチ名を表示
 let g:airline#extensions#branch#enabled = 1
 
@@ -134,7 +122,16 @@ let g:airline#extensions#tabline#enabled = 1
 " gitのHEADから変更した行の+-を非表示(vim-gitgutterの拡張)
 let g:airline#extensions#hunks#enabled = 0
 
+" d/s/dein.tomlみたいに表示されているタブ名を、dein.tomlと表示する
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" airline上で表示されるタブの順に移動
+nmap <C-p> <Plug>AirlineSelectPrevTab
+nmap <C-n> <Plug>AirlineSelectNextTab
 '''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'Xuyuanp/nerdtree-git-plugin'
@@ -386,6 +383,9 @@ repo = 'tpope/vim-surround'
 # exp: sd" cs"' , S"
 
 [[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
 repo = "vim-latex/vim-latex"
 hook_add = '''
 filetype plugin on
@@ -424,3 +424,34 @@ repo = "taketwo/vim-ros"
 hook_add = '''
 "g:ros_build_system = 'catkin'
 '''
+
+[[plugins]]
+repo = "taketwo/vim-ros"
+
+# Colorscheme ----->>>
+[[plugins]] # カラースキーマ
+repo = 'w0ng/vim-hybrid'
+hook_add = '''
+  "au MyAutoCmd VimEnter * nested colorscheme hybrid
+'''
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+hook_add = '''
+  "au MyAutoCmd VimEnter * nested colorscheme gruvbox
+  " soft, medium, hard
+  "let g:gruvbox_contrast_light = "medium"
+  let g:gruvbox_contrast_dark = "medium"
+'''
+
+[[plugins]]
+repo = 'ajh17/spacegray.vim'
+hook_add = '''
+  let g:spacegray_underline_search = 1
+  let g:spacegray_use_italics = 1
+  let g:spacegray_low_contrast = 1
+  "au MyAutoCmd VimEnter * nested colorscheme spacegray
+'''
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'

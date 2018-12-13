@@ -79,3 +79,4 @@ depends = ['neosnippet-snippets']
 repo = 'Shougo/neoyank.vim'
 on_path = '.*'
 on_event = 'BufEnter' 
+
