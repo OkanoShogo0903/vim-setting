@@ -168,10 +168,11 @@
     "open vimrc
 "        nmap <F1> :<C-u>!eog ~/vim-setting/doc/cheatsheet_1366x768.png<CR>
         nnoremap <F2> :<C-u>!eog ~/vim-setting/doc/cheatsheet_1366x768.png<CR>
+        nnoremap <F3> :<C-u>vim <C-r><C-w> **\|cw<CR>
 
-        nnoremap <F5> :<C-u>split ~/vim-setting/basic.vim<CR>
-        nnoremap <F6> :<C-u>split ~/vim-setting/dein.toml<CR>
-        nnoremap <F7> :<C-u>split ~/vim-setting/dein_lazy.toml<CR>
+        nnoremap <F6> :<C-u>split ~/vim-setting/basic.vim<CR>
+        nnoremap <F7> :<C-u>split ~/vim-setting/dein.toml<CR>
+        nnoremap <F8> :<C-u>split ~/vim-setting/dein_lazy.toml<CR>
 
         "nnoremap <F6> :<C-u>split ~/.vim/plug.vim<CR>
         "nnoremap <S-F6> :<C-u>split ~/vim-setting/plug.vim<CR>
@@ -331,6 +332,13 @@ augroup END
 "           autocmd BufRead * execute '%!expand -t 4'
     augroup END
 "----------------------------------------------------------
+augroup fileTypeIndent
+    autocmd!
+    autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.md setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
+
 "colorscheme
     syntax enable
 "    source color.vimrc

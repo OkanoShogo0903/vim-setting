@@ -231,21 +231,22 @@ repo = 'scrooloose/nerdcommenter'
 repo = 'osyo-manga/vim-over'
 # 置換時に、対象文字列をハイライトする
 
-[[plugins]]
-repo = 'nathanaelkane/vim-indent-guides'
-hook_add = '''
-    "vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
-    let g:indent_guides_enable_on_vim_startup = 1
-    "自動カラー無効
-    let g:indent_guides_auto_colors = 0
-    "偶数行と奇数行の色を設定
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black "3
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray "4
-    "何行目から色付けを行うかを指定する
-    let g:indent_guides_start_level = 2
-    "可視化領域のサイズを指定
-    let g:indent_guides_guide_size = 1
-'''
+
+#[[plugins]]
+#repo = 'nathanaelkane/vim-indent-guides'
+#hook_add = '''
+#    "vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+#    let g:indent_guides_enable_on_vim_startup = 1
+#    "自動カラー無効
+#    let g:indent_guides_auto_colors = 0
+#    "偶数行と奇数行の色を設定
+#    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black "3
+#    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray "4
+#    "何行目から色付けを行うかを指定する
+#    let g:indent_guides_start_level = 2
+#    "可視化領域のサイズを指定
+#    let g:indent_guides_guide_size = 1
+#'''
 [[plugins]]
 repo = 'ConradIrwin/vim-bracketed-paste'
 # ネットのプログラムをコピペするときにインデントされるのを防ぐ
@@ -303,7 +304,21 @@ repo = 'thinca/vim-quickrun'
 hook_add = '''
 "nmap <C-r> <Plug>(quickrun)
 nmap <Leader>r <Plug>(quickrun)
+
+let g:quickrun_config = {
+\   'tex': {
+\       'command': 'latexmk',
+\       'exec': ['%c -gg -pdfdvi %s', 'open %s:r.pdf']
+\   },
+\}
+vnoremap <silent><buffer> <F5> :QuickRun -mode v -type tmptex<CR>
+" QuickRun and view compile result quickly (but don't preview pdf file)
+nnoremap <silent><F5> :QuickRun<CR>
 '''
+
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft = 'tex'
 
 [[plugins]]
 repo = 'Lokaltog/vim-easymotion'
@@ -369,8 +384,8 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'kannokanno/previm'
 hook_add = '''
-nmap <silent> <F8> :PrevimOpen<CR>
-imap <silent> <F8> <Esc>:PrevimOpen<CR>
+nmap <silent> <F9> :PrevimOpen<CR>
+imap <silent> <F9> <Esc>:PrevimOpen<CR>
 augroup PrevimSettings
     autocmd!
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
@@ -428,6 +443,9 @@ hook_add = '''
 [[plugins]]
 repo = "taketwo/vim-ros"
 
+[[plugins]]
+repo = "Yggdroot/indentLine"
+
 # Colorscheme ----->>>
 [[plugins]] # カラースキーマ
 repo = 'w0ng/vim-hybrid'
@@ -455,3 +473,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
+
+#[[plugins]]
+#repo = 'OkanoShogo0903/hello.vim'
