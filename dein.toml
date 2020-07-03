@@ -50,7 +50,9 @@ hook_add = '''
 "let g:airline_theme = 'luna'
 "let g:airline_theme = 'tomorrow'
 "let g:airline_theme = 'deus'
-let g:airline_theme = 'gruvbox'
+"let g:airline_theme = 'gruvbox'
+"let g:airline_theme = 'iceberg'
+let g:airline_theme = 'tender'
 
 let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -139,29 +141,6 @@ repo = 'Xuyuanp/nerdtree-git-plugin'
 # 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
-
-[[plugins]]
-repo = 'osyo-manga/vim-anzu'
-hook_add = '''
-" /や?での検索ヒット時に、現在の検索位置を表示する
-    " mapping
-    " when you want to display it in screen,change this
-        if 1    " if 1
-            nmap n <Plug>(anzu-n-with-echo)
-            nmap N <Plug>(anzu-N-with-echo)
-        else    " if 0
-            nmap n <Plug>(anzu-mode-n)
-            nmap N <Plug>(anzu-mode-N)
-        endif
-        nmap * <Plug>(anzu-star-with-echo)
-        nmap # <Plug>(anzu-sharp-with-echo) 
-    " clear status
-        nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
-    " statusline
-        set statusline=%{anzu#search_status()}
-    " comment :
-    "           if you search 'word', word(12/51) in command line
-'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
@@ -473,6 +452,18 @@ hook_add = '''
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+hook_add = '''
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+'''
 
 #[[plugins]]
 #repo = 'OkanoShogo0903/hello.vim'

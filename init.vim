@@ -21,21 +21,25 @@ if has('nvim')
     let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
     let s:lazy_toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein_lazy.toml'
     if dein#load_state(s:dein_dir)
-    call dein#begin(s:dein_dir)
-    call dein#load_toml(s:toml_file)
-    call dein#load_toml(s:lazy_toml_file)
-    call dein#end()
-    call dein#save_state()
+        call dein#begin(s:dein_dir)
+        call dein#load_toml(s:toml_file)
+        call dein#load_toml(s:lazy_toml_file)
+        call dein#end()
+        call dein#save_state()
     endif
     " 不足プラグインの自動インストール
     if has('vim_starting') && dein#check_install()
-    call dein#install()
+        call dein#install()
+    endif
+
+    if dein#check_install()
+        call dein#install()
     endif
     " }}}
 
     "-----------------------------------------------------------
-    let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
-    let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
+    let g:python_host_prog=$PYENV_ROOT.'/versions/2.7.15/bin/python'
+    let g:python3_host_prog=$PYENV_ROOT.'/versions/3.6.6/bin/python'
 
     "set runtimepath+=~/vim-setting/
     "runtime! etc/*.vim 

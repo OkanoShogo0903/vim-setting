@@ -336,8 +336,15 @@ augroup fileTypeIndent
     autocmd!
     autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.md setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.launch setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.{html,htm,js,ts,vue*} setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
+augroup fileTypeColorscheme
+    autocmd!
+    autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
+    autocmd BufNewFile,BufRead *.launch set filetype=html
+augroup END
 
 "colorscheme
     syntax enable
@@ -356,7 +363,6 @@ augroup END
 "        colorscheme goodwolf
 "        colorscheme kitchen
 "        colorscheme shine
-"        colorscheme tender
 "        colorscheme pencil
 "        colorscheme kalisi
 "        colorscheme moonshine_minimal
@@ -365,7 +371,8 @@ augroup END
 "        colorscheme deus
 "        colorscheme iceberg
 "        colorscheme spacegray
-        colorscheme gruvbox
+"        colorscheme gruvbox
+        colorscheme tender
 
 " 背景を透けさせる
 "    highlight Normal ctermbg=none
