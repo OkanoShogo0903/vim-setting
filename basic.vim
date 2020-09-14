@@ -122,33 +122,10 @@
 
         ""nnoremap <C-Tab> :echo "abc"<CR>
 
-    "if サーチモードがオンの時のみにしたい
-"        nmap <Tab> n
-"        nmap <S-Tab> <S-n>
-"       nnoremap <Tab> >>
-"       nnoremap \<C-i> <C-i>
-
-    "'Edit short cut' application
-        "nnoremap <C-z> u
-"        inoremap <C-z> <Esc>ui
-        "nnoremap <C-y> <C-r>
-"        inoremap <C-y> <Esc><C-r>
-        "nnoremap <C-f> /
-        "inoremap <C-f> <Esc>/
-
-
-"        nmap <C-s> :w<CR>
-"        imap <C-s> <Esc>:w<CR>
-
-        "inoremap <C-v> <Esc>pi
-
 "数字指定してインデントする
         xnoremap <Tab> >
         xnoremap <S-Tab> <
         
-""        nnoremap <S-Space> 
-""        nnoremap <Space> 
-    
     inoremap <S-Tab> <Esc><<i
 
 " @マークに元からマッピングされていたものを無視しているため、用調整
@@ -248,7 +225,6 @@ augroup END
  "   imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 "endif
 "----------------------------------------------------------
-"Writter : okano
 "コマンドで、対応する'h'もしくは'cpp'を開く
     command! OpenFile call OpenFileFunc()
     command! OF call OpenFileFunc()
@@ -307,22 +283,6 @@ augroup END
 "            normal <C-w>w
         endif
     endfunction
-"----------------------------------------------------------
-    augroup Robocup-vimrc
-        autocmd!
-        " <C-s> で保存できるようにするためのプログラム
-""        autocmd BufNewFile,BufRead execute 'read !stty -ixon -ixoff'
-
-"        autocmd BufNewFile,BufRead * execute 'read !stty -ixon -ixoff'
-        inoremap <C-s> <C-u><C-\><C-n>:write<CR>a
-        nnoremap <C-s> :write<CR>
-        xnoremap <C-s> :<C-u>write<CR>
-    augroup END
-
-"    xnoremap t 
-"    inoremap t 
-    
-"    autocmd BufNewFile * 0r $HOME/.vim/comment.txt
 "----------------------------------------------------------
 "タブをスペース4つに変換
 " インデントの色付けを綺麗に行うために必要
