@@ -1,17 +1,8 @@
 ## vim-setting
-わたくしの設定ファイルをそのまま載せてあります.
-自由にpullして自分仕様の設定に書き換えればいいんじゃないでしょうか.
-
-余談ですが、ここ最近は夢の中にもvimが出始めてきました.
-もう病気だと思います.
-
-Neovimのインストールについてですが、  
-以外に前提知識(pyenv, .bash系)がないとつまずくかもしれません.  
-ちなみに自分は3回目のインストールで1時間ほどかかりました.        
+最近夢の中にvimが出てきました.
 
 ## NeoVimInstall 
 NeoVimはUbunto 12.04以降で使えます.
-インターネットに繋がっていることを前提にしているので、インストールを始める前にまずネットにつながるようにして下さい.
 
 1. Gitインストール
 
@@ -52,10 +43,8 @@ NeoVimはUbunto 12.04以降で使えます.
 
     ```
     mkdir ~/.config/nvim
-    cp ~/vim_setting/etc/vimrc_sample ~/.vimrc
+    cp ~/vim_setting/etc/vimrc-sample ~/.vimrc
     ln -s ~/.vimrc ~/.config/nvim/init.vim
-    ```
-
 
 ## neovim初期設定編
 nvimで`:CheckHealth`すると、エラー出るはず.
